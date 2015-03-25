@@ -249,6 +249,7 @@ void RenderToTextureScene::init()
 	_modelManager->loadModel("screen", "screen/screen.obj");
 	_modelManager->loadModel("screen2", "screen/screen.obj");
 	_modelManager->loadModel("lakitu", "lakitu/lakitu.obj");
+	_modelManager->loadModel("cam", "kamera/Kamera.obj");
 
 	_billboard = new Entity(_modelManager->getModel("screen"));
 	_billboard->addRotation(glm::vec3(1, 0, 0), -90);
@@ -263,6 +264,7 @@ void RenderToTextureScene::init()
 	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTexture"));
 	_modelManager->getModel("screen2")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTextureNew"));
 	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(0,0,0),glm::vec3(1,1,1),0,2));
+	_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(0, 5, 0)));
 	_player = new Entity(_modelManager->getModel("lakitu"), glm::vec3(0, 3, 0), glm::vec3(1, 1, 1), 0, 1.0f);
 	
 	Entity* plane = new Entity(_modelManager->getModel("plane"));
