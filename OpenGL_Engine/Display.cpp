@@ -31,9 +31,6 @@ Display::Display(std::string title, GLuint width, GLuint height, GLuint flags)
 
 	/* Enable OpenGL Features */
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_CW);
-	glFrontFace(GL_CCW);
 
 	SDL_GetWindowSize(_window, _width, _height);
 }

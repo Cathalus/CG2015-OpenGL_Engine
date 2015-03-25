@@ -154,18 +154,21 @@ void RenderToTextureScene::render()
 	// Render to Texture (Mirror)
 	_rttBuffer.bindForWriting();
 	_display->clear(0, 0, 0, 1.0f);
+	_activeCamera = _mirrorCamera;
 	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
 	draw(false);
 
 	// Render to Texture (Mirror2)
 	_rttBuffer2.bindForWriting();
-	_display->clear(1, 0, 1, 1.0f);
+	_display->clear(1, 1, 1, 1.0f);
+	_activeCamera = _mirrorCamera2;
 	_uniformManager->updateUniformData("MVP", _mirrorCamera2->getCameraProjection());
 	draw(false);
 
 	// Render to Window
 	_display->bindRenderTarget();
 	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	_activeCamera = _cameras[0];
 	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
 	draw(true);
 }
@@ -212,13 +215,13 @@ void RenderToTextureScene::init()
 	_lastY = _display->getHeight() / 2;
 
 	/* Set up Render to Texture */
-	_rttTexture = new Texture(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGBA);
+	_rttTexture = new Texture(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB);
 	_textureManager->loadTexture("rttTexture", _rttTexture);
 	_rttBuffer.init(_rttTexture, GL_COLOR_ATTACHMENT0);
 
-	_rttTexture2 = new Texture(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGBA);
-	_textureManager->loadTexture("rttTexture2", _rttTexture2);
-	_rttBuffer2.init(_rttTexture2, GL_COLOR_ATTACHMENT0);
+	_rttTextureNew = new Texture(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB);
+	_textureManager->loadTexture("rttTextureNew", _rttTextureNew);
+	_rttBuffer2.init(_rttTextureNew, GL_COLOR_ATTACHMENT1);
 
 	/* Set up shadow camera */
 	Camera* lightCamera = new Camera(*_activeCamera);
@@ -253,17 +256,15 @@ void RenderToTextureScene::init()
 	_billboard = new Entity(_modelManager->getModel("screen"));
 	_billboard->addRotation(glm::vec3(1, 0, 0), -90);
 	_billboard->addRotation(glm::vec3(0, 0, 1), 90);
-	_billboard->scale(1);
 	_billboard->setTranslation(glm::vec3(10 , 8, 0));
 
 	_billboard2 = new Entity(_modelManager->getModel("screen2"));
 	_billboard2->addRotation(glm::vec3(1, 0, 0), -90);
 	_billboard2->addRotation(glm::vec3(0, 0, 1), -90);
-	_billboard2->scale(1);
 	_billboard2->setTranslation(glm::vec3(-10, 8, 0));
 
-	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_rttTexture);
-	_modelManager->getModel("screen2")->getMeshes()[0]->setTexture(_rttTexture2);
+	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTexture"));
+	_modelManager->getModel("screen2")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTextureNew"));
 	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(0,0,0),glm::vec3(1,1,1),0,2));
 	_player = new Entity(_modelManager->getModel("lakitu"), glm::vec3(0, 3, 0), glm::vec3(1, 1, 1), 0, 1.0f);
 	

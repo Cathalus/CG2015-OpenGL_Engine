@@ -33,6 +33,7 @@ private:
 	Framebuffer _rttBuffer2;
 	Texture* _rttTexture;
 	Texture* _rttTexture2;
+	Texture* _rttTextureNew;
 	Entity* _billboard;
 	Entity* _billboard2;
 	Entity* _player;
