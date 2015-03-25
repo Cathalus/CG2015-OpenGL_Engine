@@ -151,29 +151,23 @@ void RenderToTextureScene::update(float delta)
 
 void RenderToTextureScene::render()
 {
-	Camera* temp = _activeCamera;
 	// Render to Texture (Mirror)
 	_rttBuffer.bindForWriting();
 	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
-	_activeCamera = _mirrorCamera;
 	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
 	draw(false);
 
 	// Render to Texture (Mirror2)
 	_rttBuffer2.bindForWriting();
 	_display->clear(1, 1, 1, 1.0f);
-	_activeCamera = _mirrorCamera2;
 	_uniformManager->updateUniformData("MVP", _mirrorCamera2->getCameraProjection());
 	draw(false);
 
 	// Render to Window
 	_display->bindRenderTarget();
 	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
-	_activeCamera = _cameras[0];
 	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
 	draw(true);
-
-	_activeCamera = temp;
 }
 
 void RenderToTextureScene::draw(bool drawLightSource)
