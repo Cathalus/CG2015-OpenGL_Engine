@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL_Engine", "OpenGL_Engine\OpenGL_Engine.vcxproj", "{B8530F4F-7758-4B57-991E-E47A6F0092F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Example_Project", "Example_Project\Example_Project.vcxproj", "{6B32E439-B5F7-4F41-83BA-7D9AB5A17677}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FPS_Exploration", "FPS_Exploration\FPS_Exploration.vcxproj", "{8FF011C6-E705-4A36-A048-53AD82CE8E03}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneBasedRendering", "SceneBasedRendering\SceneBasedRendering.vcxproj", "{CF55F593-D1F7-46CA-A648-F50915058454}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowMapping", "ShadowMapping\ShadowMapping.vcxproj", "{07276100-AC82-45F6-9DA3-6A575DF95B33}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderToTexture", "RenderToTexture\RenderToTexture.vcxproj", "{C95FEE08-C941-4EB5-A275-DD2DB452BC98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8530F4F-7758-4B57-991E-E47A6F0092F9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8530F4F-7758-4B57-991E-E47A6F0092F9}.Debug|Win32.Build.0 = Debug|Win32
+		{B8530F4F-7758-4B57-991E-E47A6F0092F9}.Release|Win32.ActiveCfg = Release|Win32
+		{B8530F4F-7758-4B57-991E-E47A6F0092F9}.Release|Win32.Build.0 = Release|Win32
+		{6B32E439-B5F7-4F41-83BA-7D9AB5A17677}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6B32E439-B5F7-4F41-83BA-7D9AB5A17677}.Debug|Win32.Build.0 = Debug|Win32
+		{6B32E439-B5F7-4F41-83BA-7D9AB5A17677}.Release|Win32.ActiveCfg = Release|Win32
+		{6B32E439-B5F7-4F41-83BA-7D9AB5A17677}.Release|Win32.Build.0 = Release|Win32
+		{8FF011C6-E705-4A36-A048-53AD82CE8E03}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FF011C6-E705-4A36-A048-53AD82CE8E03}.Debug|Win32.Build.0 = Debug|Win32
+		{8FF011C6-E705-4A36-A048-53AD82CE8E03}.Release|Win32.ActiveCfg = Release|Win32
+		{8FF011C6-E705-4A36-A048-53AD82CE8E03}.Release|Win32.Build.0 = Release|Win32
+		{CF55F593-D1F7-46CA-A648-F50915058454}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF55F593-D1F7-46CA-A648-F50915058454}.Debug|Win32.Build.0 = Debug|Win32
+		{CF55F593-D1F7-46CA-A648-F50915058454}.Release|Win32.ActiveCfg = Release|Win32
+		{CF55F593-D1F7-46CA-A648-F50915058454}.Release|Win32.Build.0 = Release|Win32
+		{07276100-AC82-45F6-9DA3-6A575DF95B33}.Debug|Win32.ActiveCfg = Debug|Win32
+		{07276100-AC82-45F6-9DA3-6A575DF95B33}.Debug|Win32.Build.0 = Debug|Win32
+		{07276100-AC82-45F6-9DA3-6A575DF95B33}.Release|Win32.ActiveCfg = Release|Win32
+		{07276100-AC82-45F6-9DA3-6A575DF95B33}.Release|Win32.Build.0 = Release|Win32
+		{C95FEE08-C941-4EB5-A275-DD2DB452BC98}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C95FEE08-C941-4EB5-A275-DD2DB452BC98}.Debug|Win32.Build.0 = Debug|Win32
+		{C95FEE08-C941-4EB5-A275-DD2DB452BC98}.Release|Win32.ActiveCfg = Release|Win32
+		{C95FEE08-C941-4EB5-A275-DD2DB452BC98}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

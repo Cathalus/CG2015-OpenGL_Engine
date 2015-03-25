@@ -1,0 +1,25 @@
+﻿Build started 21.03.2015 17:54:31.
+     1>Project "C:\Users\Cathalus\Desktop\OpenGL_Engine\ShadowMapping\ShadowMapping.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Cathalus\Desktop\OpenGL_Engine\\include /IC:\Users\Cathalus\Desktop\OpenGL_Engine\ /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ShadowMappingScene.cpp
+         ShadowMappingScene.cpp
+     1>c:\users\cathalus\desktop\opengl_engine\opengl_engine\model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\desktop\opengl_engine\opengl_engine\entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\desktop\opengl_engine\opengl_engine\entity.h(22): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(103): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(104): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(106): warning C4244: 'argument' : conversion from 'GLfloat' to 'int', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(109): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(110): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(171): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(172): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>c:\users\cathalus\desktop\opengl_engine\shadowmapping\shadowmappingscene.cpp(180): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Cathalus\Desktop\OpenGL_Engine\Debug\ShadowMapping.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\Cathalus\Desktop\OpenGL_Engine\\lib glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib glEngine.lib assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Cathalus\Desktop\OpenGL_Engine\Debug\ShadowMapping.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Cathalus\Desktop\OpenGL_Engine\Debug\ShadowMapping.lib" /MACHINE:X86 Debug\init.obj
+         Debug\ShadowMappingScene.obj
+         ShadowMapping.vcxproj -> C:\Users\Cathalus\Desktop\OpenGL_Engine\Debug\ShadowMapping.exe
+     1>Done Building Project "C:\Users\Cathalus\Desktop\OpenGL_Engine\ShadowMapping\ShadowMapping.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.20
