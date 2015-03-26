@@ -216,12 +216,6 @@ void ShaderManager::drawWithShaderProgram(std::string programName, Model* model,
 	// set the shader program that is going to be used
 	glUseProgram(_programs[programName]);
 
-	if (_hasShadowBuffer)
-	{
-		_shadowBuffer->bindForReading(11);
-		uniforms.updateUniformData("textureDepth", 11);
-	}
-
 	for (ShaderAttributes* attrib : model->getMeshes())
 	{
 		// bind attribute buffer

@@ -20,22 +20,20 @@ private:
 	GLfloat _ambientStrength = 0.1f;
 	GLfloat _acc = 0;
 	glm::vec3 _lightColor = glm::vec3(0);
-	glm::vec3 _lightPos = glm::vec3(10, 20, 0);
+	glm::vec3 _lightPos = glm::vec3(40, 20, 0);
+	glm::vec3 _lightDirection = glm::vec3(0,0,0) - _lightPos;
 	std::vector<Entity*> _entities;
 	Entity* _lamp;
 	float _speed = 20.0f;
-	Framebuffer* _shadowBuffer;
+
 	Camera* _mirrorCamera;
-	Camera* _mirrorCamera2;
 	Camera* _shadowCamera;
 
 	Framebuffer _rttBuffer;
-	Framebuffer _rttBuffer2;
 	Texture* _rttTexture;
-	Texture* _rttTexture2;
-	Texture* _rttTextureNew;
 	Entity* _billboard;
-	Entity* _billboard2;
 	Entity* _player;
-};
 
+	Framebuffer _shadowBuffer;
+	Texture* _shadowTexture;
+};

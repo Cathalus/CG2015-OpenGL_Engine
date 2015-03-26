@@ -1,6 +1,7 @@
 // GLSL Vertex Shader
 #version 330 core
 
+//layout(location = 0) out float fragmentDepth;
 layout(location = 0) out vec4 FragColor;
 
 in vec4 Color0;
@@ -8,6 +9,7 @@ in vec2 TexCoord0;
 in vec3 FragPos0;
 in vec3 Tangent0;
 in vec3 Normal0;
+in vec4 ShadowCoord0; 
 
 struct Material {
 	vec3 ambient;
@@ -25,6 +27,7 @@ uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 uniform float ambientStrength;
 uniform Material material;
+uniform vec3 lightDirection;
 
 vec3 calcBumpMap()
 {
@@ -46,11 +49,16 @@ vec3 calcBumpMap()
 
 void main()
 {
+	float visibility = 1.0;
+	if ( texture2D( textureDepth, ShadowCoord0.xy ).z  <  ShadowCoord0.z){
+		visibility = 0.5;
+	}
+
 	// Ambient
 	vec3 ambient = ambientStrength * lightColor * material.ambient;
 	
 	// Diffuse
-	vec3 lightDir = normalize(lightPosition - FragPos0);
+	vec3 lightDir = normalize(-lightDirection);
 	vec3 normal = calcBumpMap();
 	float lamberFactor = max(dot(normal, lightDir), 0.0);
 	vec3 diffuse = lamberFactor * lightColor * material.diffuse;
@@ -68,12 +76,11 @@ void main()
 		result = (diffuse + specular); 
 	}
 	vec4 diffuseColor = texture2D(textureDiffuse, TexCoord0);
-	if(diffuseColor.r >= 250 && diffuseColor.b >= 250)
-		discard;
-	FragColor = vec4(result,1.0) * diffuseColor;
+	FragColor = vec4(result,1.0) * diffuseColor * visibility;
 	
 	float Depth = texture(textureDepth, TexCoord0).x;
     Depth = 1.0 - (1.0 - Depth) * 25.0;
     //FragColor = vec4(Depth);
 	
+	//fragmentDepth = gl_FragCoord.z;
 }

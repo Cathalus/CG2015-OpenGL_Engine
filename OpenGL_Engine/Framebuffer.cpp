@@ -1,17 +1,17 @@
 #include "Framebuffer.h"
 #include <iostream>
 
-bool Framebuffer::init(Texture* texture, GLenum attachment)
+bool Framebuffer::init(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLenum attachment)
 {
 	// Create FBO
 	glGenFramebuffers(1, &_fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
 
 	// Create buffer
 	_attachment = attachment;
-	_texture = texture;
+	_texture = new Texture(width, height, textureTarget, internalFormat, format);
 	GLuint* texID = _texture->getID();
-	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
-	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment, _texture->getTextureTarget(), *texID, 0);
+	glFramebufferTexture(GL_DRAW_FRAMEBUFFER, attachment, *texID, 0);
 
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);

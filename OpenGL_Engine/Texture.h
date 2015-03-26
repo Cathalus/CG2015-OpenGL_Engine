@@ -7,7 +7,7 @@ class Texture
 {
 public:
 	Texture(const std::string& fileName, GLenum textureTarget = GL_TEXTURE_2D);
-	Texture(GLuint width, GLuint height, GLenum textureTarget = GL_TEXTURE_2D, GLenum textureComponent = GL_RGB);
+	Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format);
 	void Bind(unsigned int unit);
 	inline GLuint* getID() { return _texture; }
 	inline GLenum getTextureTarget() { return _textureTarget;  }
