@@ -1,3 +1,6 @@
+OpenGL_Engine/Debug/
+OpenGL_Engine/Debug/*
+**/Debug/
 Debug/
 *.opensdf
 Debug/RenderToTexture.exe
