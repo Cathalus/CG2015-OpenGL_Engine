@@ -49,10 +49,10 @@ vec3 calcBumpMap()
 
 void main()
 {
+	vec4 shadowCoordinateWdivide = ShadowCoord0 / ShadowCoord0.w;
 	float visibility = 1.0;
-	if ( texture2D( textureDepth, ShadowCoord0.xy ).z  <  ShadowCoord0.z){
-		visibility = 0.5;
-	}
+	if(ShadowCoord0.w > 0.0)
+		visibility = texture2D( textureDepth, ShadowCoord0.xy ).z < shadowCoordinateWdivide.z ? 0.5 : 1.0;
 
 	// Ambient
 	vec3 ambient = ambientStrength * lightColor * material.ambient;

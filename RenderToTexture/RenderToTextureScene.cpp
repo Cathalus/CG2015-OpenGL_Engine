@@ -27,27 +27,27 @@ void RenderToTextureScene::update(float delta)
 
 	if (currentKeyStates[SDL_SCANCODE_W])
 	{
-		_activeCamera->setPosition(_activeCamera->getPosition() + _activeCamera->getForward()*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + _cameras[0]->getForward()*delta*_speed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_S])
 	{
-		_activeCamera->setPosition(_activeCamera->getPosition() - _activeCamera->getForward()*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() - _cameras[0]->getForward()*delta*_speed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_A])
 	{
-		_activeCamera->setPosition(_activeCamera->getPosition() - (glm::normalize(glm::cross(_activeCamera->getForward(), _activeCamera->getUp())))*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() - (glm::normalize(glm::cross(_cameras[0]->getForward(), _cameras[0]->getUp())))*delta*_speed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_D])
 	{
-		_activeCamera->setPosition(_activeCamera->getPosition() + (glm::normalize(glm::cross(_activeCamera->getForward(), _activeCamera->getUp())))*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + (glm::normalize(glm::cross(_cameras[0]->getForward(), _cameras[0]->getUp())))*delta*_speed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_SPACE])
 	{
-		_activeCamera->setPosition(_activeCamera->getPosition() + glm::vec3(0, delta*_speed, 0));
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, delta*_speed, 0));
 	}
 	if (currentKeyStates[SDL_SCANCODE_LSHIFT])
 	{
-		_activeCamera->setPosition(_activeCamera->getPosition() + glm::vec3(0, -delta*_speed, 0));
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, -delta*_speed, 0));
 	}
 
 	if (currentKeyStates[SDL_SCANCODE_PAGEUP])
@@ -61,23 +61,27 @@ void RenderToTextureScene::update(float delta)
 
 	if (currentKeyStates[SDL_SCANCODE_UP])
 	{
-		_entities[0]->translate(glm::vec3(delta*(-_speed), 0, 0));
-		//_entities[0]->setMatrix(glm::translate(*_entities[0]->getMatrix(), glm::vec3(delta*(-_speed), 0, 0)));
+		_lightPos += glm::vec3(-delta*_speed,0,0);
 	}
 	if (currentKeyStates[SDL_SCANCODE_DOWN])
 	{
-		_entities[0]->translate(glm::vec3(delta*(_speed), 0, 0));
-		//_entities[0]->setMatrix(glm::translate(*_entities[0]->getMatrix(), glm::vec3(delta*(_speed), 0, 0)));
+		_lightPos += glm::vec3(delta*_speed, 0, 0);
 	}
 	if (currentKeyStates[SDL_SCANCODE_LEFT])
 	{
-		_entities[0]->translate(glm::vec3(0, 0, delta*(_speed)));
-		//_entities[0]->setMatrix(glm::translate(*_entities[0]->getMatrix(), glm::vec3(0, 0, delta*(_speed))));
+		_lightPos += glm::vec3(0, 0, delta*_speed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_RIGHT])
 	{
-		_entities[0]->translate(glm::vec3(0, 0, delta*(-_speed)));
-		//_entities[0]->setMatrix(glm::translate(*_entities[0]->getMatrix(), glm::vec3(0, 0, delta*(-_speed))));
+		_lightPos += glm::vec3(0, 0, -delta*_speed);
+	}
+	if (currentKeyStates[SDL_SCANCODE_O])
+	{
+		_lightPos += glm::vec3(0, delta*_speed, 0);
+	}
+	if (currentKeyStates[SDL_SCANCODE_L])
+	{
+		_lightPos += glm::vec3(0, -delta*_speed, 0);
 	}
 
 	if (currentKeyStates[SDL_SCANCODE_1])
@@ -88,13 +92,9 @@ void RenderToTextureScene::update(float delta)
 	{
 		_activeCamera = _mirrorCamera;
 	}
-	else if (currentKeyStates[SDL_SCANCODE_4])
-	{
-		_activeCamera = _shadowCamera;
-	}
 	else if (currentKeyStates[SDL_SCANCODE_3])
 	{
-		_activeCamera = _mirrorCamera2;
+		_activeCamera = _shadowCamera;
 	}
 
 
@@ -136,7 +136,6 @@ void RenderToTextureScene::update(float delta)
 
 	_lamp->setTranslation(_lightPos);
 	_mirrorCamera->setPosition(_billboard->getPosition());
-	_mirrorCamera2->setPosition(_billboard2->getPosition());
 
 	glm::vec3 mainCam = _cameras[0]->getPosition();
 	glm::vec3 mainCamForward = _cameras[0]->getForward();
@@ -144,9 +143,9 @@ void RenderToTextureScene::update(float delta)
 	glm::vec3 mirrorFwd = glm::normalize(mirrorCam - (mainCam+mainCamForward));
 	_mirrorCamera->setForward(glm::reflect(mirrorFwd, glm::vec3(1,0,0)));
 
-	mirrorCam = _mirrorCamera2->getPosition();
-	mirrorFwd = glm::normalize(mirrorCam - (mainCam + mainCamForward));
-	_mirrorCamera2->setForward(glm::reflect(mirrorFwd, glm::vec3(1, 0, 0)));
+	// Update light Direction
+	_lightDirection = glm::vec3(0, 0, 0) - _lightPos;
+	_shadowCamera->setPosition(-_lightDirection);
 }
 
 void RenderToTextureScene::render()
@@ -157,11 +156,23 @@ void RenderToTextureScene::render()
 	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
 	draw(false);
 
-	// Render to Texture (Mirror2)
-	_rttBuffer2.bindForWriting();
-	_display->clear(1, 1, 1, 1.0f);
-	_uniformManager->updateUniformData("MVP", _mirrorCamera2->getCameraProjection());
+	// Shadow
+	_shadowBuffer.bindForWriting();
+	_display->clear(0, 0, 0, 1.0f);
+	_uniformManager->updateUniformData("MVP", _shadowCamera->getCameraProjection());
+	_uniformManager->updateUniformData("DepthMVP", _shadowCamera->getCameraProjection());
+	glm::mat4 biasMatrix(
+		0.5, 0.0, 0.0, 0.0,
+		0.0, 0.5, 0.0, 0.0,
+		0.0, 0.0, 0.5, 0.0,
+		0.5, 0.5, 0.5, 1.0
+		);
+	glm::mat4 depthBiasMVP = biasMatrix*_shadowCamera->getCameraProjection();
+	_uniformManager->updateUniformData("DepthBiasMVP", depthBiasMVP);
 	draw(false);
+
+	_shadowBuffer.bindForReading(11);
+	_uniformManager->updateUniformData("textureDepth", 11);
 
 	// Render to Window
 	_display->bindRenderTarget();
@@ -192,13 +203,11 @@ void RenderToTextureScene::draw(bool drawLightSource)
 	// Billboard
 	_uniformManager->updateUniformData("model", *_billboard->getCombinedMatrix());
 	_shaderManager->drawWithShaderProgram("mirror", _billboard->getModel(), *_uniformManager);
-	// Billboard2
-	_uniformManager->updateUniformData("model", *_billboard2->getCombinedMatrix());
-	_shaderManager->drawWithShaderProgram("mirror", _billboard2->getModel(), *_uniformManager);
 
 	/* Update Uniforms */
 	_uniformManager->updateUniformData("lightColor", _lightColor);
 	_uniformManager->updateUniformData("lightPosition", _lightPos);
+	_uniformManager->updateUniformData("lightDirection", _lightDirection);
 	_uniformManager->updateUniformData("ambientStrength", _ambientStrength);
 	_uniformManager->updateUniformData("viewPosition", _activeCamera->getPosition());
 }
@@ -212,59 +221,42 @@ void RenderToTextureScene::init()
 	_lastY = _display->getHeight() / 2;
 
 	/* Set up Render to Texture */
-	_rttTexture = new Texture(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB);
-	_textureManager->loadTexture("rttTexture", _rttTexture);
-	_rttBuffer.init(_rttTexture, GL_COLOR_ATTACHMENT0);
+	_rttBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB32F, GL_RGB, GL_COLOR_ATTACHMENT0);
+	_rttTexture = _rttBuffer.getTexture();
 
-	_rttTextureNew = new Texture(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB);
-	_textureManager->loadTexture("rttTextureNew", _rttTextureNew);
-	_rttBuffer2.init(_rttTextureNew, GL_COLOR_ATTACHMENT1);
-
-	/* Set up shadow camera */
-	Camera* lightCamera = new Camera(*_activeCamera);
-	glm::vec3 forward = glm::vec3(-0.8f, -0.6f, 0.0f);
-	lightCamera->setForward(forward);
-	lightCamera->setPosition(_lightPos);
-	_shadowCamera = lightCamera;
-	_cameras.push_back(_shadowCamera);
-
-	/* Set up mirror camera */
-	Camera* mirrorCamera = new Camera(*_activeCamera);
-	forward = glm::vec3(-1, 0, 0);
-	mirrorCamera->setForward(forward);
-	mirrorCamera->setPosition(_lightPos);
-	_mirrorCamera = mirrorCamera;
-	_cameras.push_back(_mirrorCamera);
-
-	/* Set up mirror camera */
-	Camera* mirrorCamera2 = new Camera(*_activeCamera);
-	forward = glm::vec3(1, 0, 0);
-	mirrorCamera2->setForward(forward);
-	mirrorCamera2->setPosition(_lightPos);
-	_mirrorCamera2 = mirrorCamera2;
-	_cameras.push_back(_mirrorCamera2);
+	/* Shadow Buffering */
+	_shadowBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_DEPTH_COMPONENT32, GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT);
+	_shadowTexture = _shadowBuffer.getTexture();
 
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("plane", "plane/plane.obj");
 	_modelManager->loadModel("screen", "screen/screen.obj");
 	_modelManager->loadModel("screen2", "screen/screen.obj");
 	_modelManager->loadModel("lakitu", "lakitu/lakitu.obj");
-	_modelManager->loadModel("cam", "kamera/Kamera.obj");
+	_modelManager->loadModel("cam", "kamera/KameraNew.obj");
 
 	_billboard = new Entity(_modelManager->getModel("screen"));
 	_billboard->addRotation(glm::vec3(1, 0, 0), -90);
 	_billboard->addRotation(glm::vec3(0, 0, 1), 90);
 	_billboard->setTranslation(glm::vec3(10 , 8, 0));
 
-	_billboard2 = new Entity(_modelManager->getModel("screen2"));
-	_billboard2->addRotation(glm::vec3(1, 0, 0), -90);
-	_billboard2->addRotation(glm::vec3(0, 0, 1), -90);
-	_billboard2->setTranslation(glm::vec3(-10, 8, 0));
+	/* Set up mirror camera */
+	Camera* mirrorCamera = new Camera(_billboard->getPosition(), 60, 1, 0.1, 500);
+	glm::vec3 forward = glm::vec3(-1, 0, 0);
+	mirrorCamera->setForward(forward);
+	_mirrorCamera = mirrorCamera;
+	_cameras.push_back(_mirrorCamera);
 
-	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTexture"));
+	Camera* shadowCamera = new Camera(-_lightDirection, -160, 160, -90, 90, -100, 1000);
+	_shadowCamera = shadowCamera;
+	_cameras.push_back(_shadowCamera);
+
+	_textureManager->loadTexture("default", "default.png");
+
+	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_rttTexture);
 	_modelManager->getModel("screen2")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTextureNew"));
-	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(0,0,0),glm::vec3(1,1,1),0,2));
-	_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(0, 5, 0)));
+	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(-5,0,0),glm::vec3(1,1,1),0,2));
+	_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(-7, 5, 0)));
 	_player = new Entity(_modelManager->getModel("lakitu"), glm::vec3(0, 3, 0), glm::vec3(1, 1, 1), 0, 1.0f);
 	
 	Entity* plane = new Entity(_modelManager->getModel("plane"));
