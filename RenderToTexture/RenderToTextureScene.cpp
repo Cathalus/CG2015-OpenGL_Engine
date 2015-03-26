@@ -144,8 +144,8 @@ void RenderToTextureScene::update(float delta)
 	_mirrorCamera->setForward(glm::reflect(mirrorFwd, glm::vec3(1,0,0)));
 
 	// Update light Direction
-	_lightDirection = glm::vec3(0, 0, 0) - _lightPos;
-	_shadowCamera->setPosition(-_lightDirection);
+	_shadowCamera->setPosition(_lightPos);
+	_shadowCamera->setForward(glm::vec3(-1, -1, 0));
 }
 
 void RenderToTextureScene::render()
@@ -154,35 +154,51 @@ void RenderToTextureScene::render()
 	_rttBuffer.bindForWriting();
 	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
 	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
-	draw(false);
+	draw(true);
+
+	Camera* temp = _activeCamera;
 
 	// Shadow
+	_activeCamera = _shadowCamera;
 	_shadowBuffer.bindForWriting();
-	_display->clear(0, 0, 0, 1.0f);
+	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
 	_uniformManager->updateUniformData("MVP", _shadowCamera->getCameraProjection());
-	_uniformManager->updateUniformData("DepthMVP", _shadowCamera->getCameraProjection());
-	glm::mat4 biasMatrix(
-		0.5, 0.0, 0.0, 0.0,
-		0.0, 0.5, 0.0, 0.0,
-		0.0, 0.0, 0.5, 0.0,
-		0.5, 0.5, 0.5, 1.0
-		);
-	glm::mat4 depthBiasMVP = biasMatrix*_shadowCamera->getCameraProjection();
-	_uniformManager->updateUniformData("DepthBiasMVP", depthBiasMVP);
-	draw(false);
+	drawShadowMap("shadowMap");
 
-	_shadowBuffer.bindForReading(11);
-	_uniformManager->updateUniformData("textureDepth", 11);
+	_activeCamera = temp;
 
 	// Render to Window
 	_display->bindRenderTarget();
 	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	_uniformManager->updateUniformData("DepthMVP", _shadowCamera->getCameraProjection());
 	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
-	draw(true);
+	draw(true); 
+}
+
+void RenderToTextureScene::drawShadowMap(std::string shader)
+{	
+	for (Entity* e : _entities)
+	{
+		_uniformManager->updateUniformData("model", *e->getCombinedMatrix());
+		_shaderManager->drawWithShaderProgram(shader, e->getModel(), *_uniformManager);
+	}
+	// Billboard
+	_uniformManager->updateUniformData("model", *_billboard->getCombinedMatrix());
+	_shaderManager->drawWithShaderProgram(shader, _billboard->getModel(), *_uniformManager);
 }
 
 void RenderToTextureScene::draw(bool drawLightSource)
 {
+	_shadowBuffer.bindForReading(11);
+	_uniformManager->updateUniformData("textureDepth", 11);
+
+	/* Update Uniforms */
+	_uniformManager->updateUniformData("lightColor", _lightColor);
+	_uniformManager->updateUniformData("lightPosition", _lightPos);
+	_uniformManager->updateUniformData("lightDirection", _lightDirection);
+	_uniformManager->updateUniformData("ambientStrength", _ambientStrength);
+	_uniformManager->updateUniformData("viewPosition", _activeCamera->getPosition());
+
 	/* Render Entities */
 	for (Entity* e : _entities)
 	{
@@ -203,13 +219,6 @@ void RenderToTextureScene::draw(bool drawLightSource)
 	// Billboard
 	_uniformManager->updateUniformData("model", *_billboard->getCombinedMatrix());
 	_shaderManager->drawWithShaderProgram("mirror", _billboard->getModel(), *_uniformManager);
-
-	/* Update Uniforms */
-	_uniformManager->updateUniformData("lightColor", _lightColor);
-	_uniformManager->updateUniformData("lightPosition", _lightPos);
-	_uniformManager->updateUniformData("lightDirection", _lightDirection);
-	_uniformManager->updateUniformData("ambientStrength", _ambientStrength);
-	_uniformManager->updateUniformData("viewPosition", _activeCamera->getPosition());
 }
 
 void RenderToTextureScene::init()
@@ -225,7 +234,7 @@ void RenderToTextureScene::init()
 	_rttTexture = _rttBuffer.getTexture();
 
 	/* Shadow Buffering */
-	_shadowBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_DEPTH_COMPONENT32, GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT);
+	_shadowBuffer.init(1024, 1024, GL_TEXTURE_2D, GL_DEPTH_COMPONENT24, GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT,true);
 	_shadowTexture = _shadowBuffer.getTexture();
 
 	_modelManager->loadModel("cube", "cube/cube.obj");
@@ -247,7 +256,7 @@ void RenderToTextureScene::init()
 	_mirrorCamera = mirrorCamera;
 	_cameras.push_back(_mirrorCamera);
 
-	Camera* shadowCamera = new Camera(-_lightDirection, -160, 160, -90, 90, -100, 1000);
+	Camera* shadowCamera = new Camera(_lightDirection, -40, 40, -40, 40, -100, 100);
 	_shadowCamera = shadowCamera;
 	_cameras.push_back(_shadowCamera);
 
@@ -256,12 +265,12 @@ void RenderToTextureScene::init()
 	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_rttTexture);
 	_modelManager->getModel("screen2")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTextureNew"));
 	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(-5,0,0),glm::vec3(1,1,1),0,2));
-	_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(-7, 5, 0)));
+	//_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(-14, 10, 0)));
 	_player = new Entity(_modelManager->getModel("lakitu"), glm::vec3(0, 3, 0), glm::vec3(1, 1, 1), 0, 1.0f);
 	
 	Entity* plane = new Entity(_modelManager->getModel("plane"));
 	plane->scale(5);
-	plane->translate(glm::vec3(0, -5, 0));
+	plane->translate(glm::vec3(0, -1, 0));
 	_entities.push_back(plane);
 	
 	_lamp = new Entity(_modelManager->getModel("cube"));

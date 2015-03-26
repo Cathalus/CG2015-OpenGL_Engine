@@ -37,7 +37,7 @@ public:
 		{
 			case ORTHO:
 				return _perspective * glm::lookAt(_position,
-													glm::vec3(0, 0, 0),
+												  _position + _forward,
 													_up);
 				break;
 			case PERSPECTIVE:

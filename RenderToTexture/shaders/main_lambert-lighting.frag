@@ -19,9 +19,9 @@ struct Material {
 	float shininessStrength;
 };
 
-uniform sampler2D textureDiffuse;
-uniform sampler2D textureNormal;
-uniform sampler2D textureDepth;
+uniform sampler2D textureDiffuse;		// DiffuseMap
+uniform sampler2D textureNormal;		// NormalMap
+uniform sampler2D textureDepth;			// ShadowMap
 uniform vec3 lightColor;
 uniform vec3 lightPosition;
 uniform vec3 viewPosition;
@@ -47,18 +47,27 @@ vec3 calcBumpMap()
 	return result;	
 }
 
+float sampleShadowMap(sampler2D shadowMap, vec2 coords, float compare)
+{
+	// Returns 0 or 1 compare is farther away than the tex value
+	return step(compare, texture2D(shadowMap, coords.xy).r);
+}
+
+float calcShadowAmount(sampler2D shadowMap, vec4 shadowMapCoords)
+{
+	vec3 shadowMapCoords0 = (shadowMapCoords.xyz/shadowMapCoords.w)* vec3(0.5) + vec3(0.5);	// Depth-bias -1|1 to 0|1
+	return sampleShadowMap(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z);
+}
+
 void main()
 {
 	vec4 shadowCoordinateWdivide = ShadowCoord0 / ShadowCoord0.w;
-	float visibility = 1.0;
-	if(ShadowCoord0.w > 0.0)
-		visibility = texture2D( textureDepth, ShadowCoord0.xy ).z < shadowCoordinateWdivide.z ? 0.5 : 1.0;
-
+		
 	// Ambient
 	vec3 ambient = ambientStrength * lightColor * material.ambient;
 	
 	// Diffuse
-	vec3 lightDir = normalize(-lightDirection);
+	vec3 lightDir = normalize(lightPosition - FragPos0);
 	vec3 normal = calcBumpMap();
 	float lamberFactor = max(dot(normal, lightDir), 0.0);
 	vec3 diffuse = lamberFactor * lightColor * material.diffuse;
@@ -76,11 +85,13 @@ void main()
 		result = (diffuse + specular); 
 	}
 	vec4 diffuseColor = texture2D(textureDiffuse, TexCoord0);
-	FragColor = vec4(result,1.0) * diffuseColor * visibility;
+	FragColor = vec4(result,1.0) * diffuseColor * (0.5+0.5*calcShadowAmount(textureDepth, ShadowCoord0));
 	
-	float Depth = texture(textureDepth, TexCoord0).x;
-    Depth = 1.0 - (1.0 - Depth) * 25.0;
-    //FragColor = vec4(Depth);
+	//float Depth = texture(textureDepth, ShadowCoord0.xy).r;
+    //FragColor = vec4(texture2D(textureDepth, ShadowCoord0.xy).r);
+	
+	// Show depth buffer
+	//FragColor = vec4(gl_FragCoord.z);
 	
 	//fragmentDepth = gl_FragCoord.z;
 }

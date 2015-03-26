@@ -8,7 +8,6 @@ layout (location = 3) in vec3 tangent;
 
 uniform mat4 MVP;
 uniform mat4 DepthMVP;
-uniform mat4 DepthBiasMVP;
 uniform mat4 model;
 
 out vec4 Color0;
@@ -27,5 +26,5 @@ void main()
 	FragPos0 = vec3(model*vec4(position,1.0f));
 	Tangent0 = (model*vec4(tangent,0)).xyz;
 	Normal0 = mat3(transpose(inverse(model))) * normal.xyz;
-	ShadowCoord0 = DepthBiasMVP * model * vec4(position, 1.0);
+	ShadowCoord0 = DepthMVP * model * vec4(position, 1.0);
 }

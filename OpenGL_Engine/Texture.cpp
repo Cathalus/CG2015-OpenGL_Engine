@@ -43,11 +43,11 @@ Texture::Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum inter
 	glGenTextures(1, _texture);
 	_textureTarget = textureTarget;
 	glBindTexture(textureTarget, *_texture);
-	glTexImage2D(textureTarget, 0, internalFormat, width, height, 0, format, GL_FLOAT, NULL);
 	glTexParameterf(textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameterf(textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(textureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(textureTarget, 0, internalFormat, width, height, 0, format, GL_FLOAT, NULL);
 	_width = width;
 	_height = height;
 }

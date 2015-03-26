@@ -6,7 +6,7 @@ class Framebuffer
 {
 public:
 	~Framebuffer();
-	bool init(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLenum attachment = GL_NONE);
+	bool init(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLenum attachment = GL_NONE, bool hasDepth = false);
 	void addDepthTexture(Texture* texture);
 	void bindForWriting();
 	void bindForReading(GLenum TextureUnit);

@@ -1,11 +1,13 @@
 #include "Framebuffer.h"
 #include <iostream>
 
-bool Framebuffer::init(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLenum attachment)
+bool Framebuffer::init(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLenum attachment, bool hasDepth)
 {
 	// Create FBO
 	glGenFramebuffers(1, &_fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
+
+	_hasDepth = hasDepth;
 
 	// Create buffer
 	_attachment = attachment;
@@ -43,6 +45,7 @@ bool Framebuffer::init(GLuint width, GLuint height, GLenum textureTarget, GLenum
 
 void Framebuffer::bindForWriting()
 {
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, _fbo);
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "OpenGL_Engine\Engine.h"
+
 class RenderToTextureScene :
 	public Scene
 {
@@ -10,6 +11,7 @@ public:
 	void update(float delta);
 	void render();
 	void draw(bool drawLightSource);
+	void drawShadowMap(std::string shader);
 	void init();
 	void loadAssets();
 	void unloadAssets();
@@ -20,7 +22,7 @@ private:
 	GLfloat _ambientStrength = 0.1f;
 	GLfloat _acc = 0;
 	glm::vec3 _lightColor = glm::vec3(0);
-	glm::vec3 _lightPos = glm::vec3(40, 20, 0);
+	glm::vec3 _lightPos = glm::vec3(20, 40, 0);
 	glm::vec3 _lightDirection = glm::vec3(0,0,0) - _lightPos;
 	std::vector<Entity*> _entities;
 	Entity* _lamp;

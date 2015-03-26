@@ -18,13 +18,12 @@ int main()
 	int fps = 60;
 	int fpsMill = 1000 / fps;
 	int currentFrameSpeed = 0;
-
-	std::cout << glGetString(GL_VERSION) << GL_VERSION_3_3 << std::endl;
-
+	
 	/* Shader Setup */
 	shaderManager->createShaderProgram("main", { "main_lambert-lighting.vert", "main_lambert-lighting.frag" });
 	shaderManager->createShaderProgram("lamp", { "lamp.vert", "lamp.frag" });
 	shaderManager->createShaderProgram("mirror", { "mirror.vert", "mirror.frag" });
+	shaderManager->createShaderProgram("shadowMap", { "main_shadowmap.vert", "main_shadowmap.frag" });
 
 	/* Scene Setup */
 	RenderToTextureScene scene(display, shaderManager, textureManager, modelManager, uniforms);
