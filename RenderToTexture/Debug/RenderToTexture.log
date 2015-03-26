@@ -1,27 +1,8 @@
-﻿Build started 26.03.2015 00:12:04.
-     1>Project "C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\RenderToTexture\RenderToTexture.vcxproj" on node 3 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\\include" /I"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\\" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt RenderToTextureScene.cpp
-         RenderToTextureScene.cpp
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\opengl_engine\model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\opengl_engine\entity.h(69): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\opengl_engine\entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\opengl_engine\entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\opengl_engine\entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(116): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(117): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(119): warning C4244: 'argument' : conversion from 'GLfloat' to 'int', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(122): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(123): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(211): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(212): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(224): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(232): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine\rendertotexture\rendertotexturescene.cpp(240): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
-       Link:
+﻿Build started 26.03.2015 10:20:34.
+     1>Project "C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\RenderToTexture\RenderToTexture.vcxproj" on node 2 (Build target(s)).
+     1>Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\Debug\RenderToTexture.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib glEngine.lib assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\Debug\RenderToTexture.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\Debug\RenderToTexture.lib" /MACHINE:X86 Debug\init.obj
          Debug\RenderToTextureScene.obj
-         LINK : C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine\Debug\RenderToTexture.exe not found or not built by the last incremental link; performing full link
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>glEngine.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewDrawBuffers imported
      1>glEngine.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewBindFramebuffer imported
@@ -72,4 +53,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.67
+Time Elapsed 00:00:00.34

@@ -237,6 +237,13 @@ void ShaderManager::drawWithShaderProgram(std::string programName, Model* model,
 			attrib->getNormalTexture()->Bind(10);
 			uniforms.updateUniformData("textureNormal", 10);
 		}
+		// send material data
+		uniforms.updateUniformData("material.ambient", attrib->Material.ambient);
+		uniforms.updateUniformData("material.diffuse", attrib->Material.diffuse);
+		uniforms.updateUniformData("material.specular", attrib->Material.specular);
+		uniforms.updateUniformData("material.shininess", attrib->Material.shininess);
+		uniforms.updateUniformData("material.shininessStrength", attrib->Material.shininessStrength);
+
 		// upload uniform data
 		uniforms.uploadUniformData(_programs[programName]);
 		// draw

@@ -5,7 +5,7 @@
 int main()
 {
 	/* General setup */
-	Display* display = new Display("Render to Texture", 1280, 720, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	Display* display = new Display("Render to Texture", 1280, 720);
 
 	ShaderManager* shaderManager = new ShaderManager();
 	TextureManager* textureManager = new TextureManager();
@@ -22,7 +22,7 @@ int main()
 	std::cout << glGetString(GL_VERSION) << GL_VERSION_3_3 << std::endl;
 
 	/* Shader Setup */
-	shaderManager->createShaderProgram("main", { "main.vert", "main.frag" });
+	shaderManager->createShaderProgram("main", { "main_lambert-lighting.vert", "main_lambert-lighting.frag" });
 	shaderManager->createShaderProgram("lamp", { "lamp.vert", "lamp.frag" });
 	shaderManager->createShaderProgram("mirror", { "mirror.vert", "mirror.frag" });
 

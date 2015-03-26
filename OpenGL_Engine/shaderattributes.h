@@ -27,6 +27,14 @@ public:
 	inline void setNormalTexture(Texture* texture) { _hasNormalTexture = true; _normalTexture = texture; }
 	inline bool hasTexture() { return _hasTexture; }
 	inline bool hasNormalTexture() { return _hasNormalTexture; }
+
+	struct Material {
+		glm::vec3 ambient = glm::vec3(1,1,1);
+		glm::vec3 diffuse = glm::vec3(1, 1, 1);
+		glm::vec3 specular = glm::vec3(1, 1, 1);
+		float shininess = 32;
+		float shininessStrength = 0.5;
+	} Material;
 private:
     void bindBuffers();
     unsigned int getVBOCount() { return _vboCount; }

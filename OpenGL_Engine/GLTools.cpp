@@ -718,6 +718,31 @@ void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene)
 			if (a->mMaterialIndex > 0)
 			{
 				const aiMaterial* material = scene->mMaterials[a->mMaterialIndex];
+				/* Get Material Properties*/
+				// Diffuse Color
+				aiColor3D color(0.f, 0.f, 0.f);
+				if(material->Get(AI_MATKEY_COLOR_DIFFUSE, color) == AI_SUCCESS)
+					mesh->Material.diffuse = glm::vec3(color.r, color.g, color.b);
+				// Ambient Color
+				aiColor3D ambient(0, 0, 0);
+				if (material->Get(AI_MATKEY_COLOR_AMBIENT, ambient) == AI_SUCCESS)
+					mesh->Material.ambient = glm::vec3(ambient.r, ambient.g, ambient.b);
+				// Specular Color
+				aiColor3D specular(0, 0, 0);
+				if (material->Get(AI_MATKEY_COLOR_AMBIENT, specular) == AI_SUCCESS)
+					mesh->Material.ambient = glm::max(glm::vec3(specular.r, specular.g, specular.b), glm::vec3(0.1,0.1,0.1));
+				// Shininess
+				float shininess = 0;
+				if (material->Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS)
+					mesh->Material.shininess = glm::max(shininess,8.0f);
+				// Shininess Strength
+				float shininessStrength = 0;
+				if (material->Get(AI_MATKEY_SHININESS_STRENGTH, shininessStrength) == AI_SUCCESS)
+					mesh->Material.shininessStrength = shininessStrength;
+					
+
+				std::cout << "Shiniess = " << shininess << " strength = " << shininessStrength << std::endl;
+				
 				aiString texturePath;
 				if(material->GetTextureCount(aiTextureType_DIFFUSE) > 0 &&
 					material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS)
