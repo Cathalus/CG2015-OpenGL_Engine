@@ -1,6 +1,6 @@
-# Blender v2.73 (sub 0) OBJ File: 'Hütte1save.blend'
+# Blender v2.73 (sub 0) OBJ File: 'house.blend'
 # www.blender.org
-mtllib House.mtl
+mtllib house.mtl
 o TopeFrame_Cube.001
 v -6.565124 2.694306 0.663229
 v -6.606985 2.694306 0.073890
