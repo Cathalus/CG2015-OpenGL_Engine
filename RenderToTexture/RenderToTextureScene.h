@@ -22,7 +22,7 @@ private:
 	GLfloat _ambientStrength = 0.1f;
 	GLfloat _acc = 0;
 	glm::vec3 _lightColor = glm::vec3(0);
-	glm::vec3 _lightPos = glm::vec3(20, 40, 0);
+	glm::vec3 _lightPos = glm::vec3(0, 40, 0);
 	glm::vec3 _lightDirection = glm::vec3(0,0,0) - _lightPos;
 	std::vector<Entity*> _entities;
 	Entity* _lamp;

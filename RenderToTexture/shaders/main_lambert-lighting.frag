@@ -56,13 +56,17 @@ float sampleShadowMap(sampler2D shadowMap, vec2 coords, float compare)
 float calcShadowAmount(sampler2D shadowMap, vec4 shadowMapCoords)
 {
 	vec3 shadowMapCoords0 = (shadowMapCoords.xyz/shadowMapCoords.w)* vec3(0.5) + vec3(0.5);	// Depth-bias -1|1 to 0|1
-	return sampleShadowMap(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z);
+	float bias = 0.005;
+	return sampleShadowMap(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z-bias);
 }
 
 void main()
 {
 	vec4 shadowCoordinateWdivide = ShadowCoord0 / ShadowCoord0.w;
-		
+	
+	// Shadow
+	float shadowAmount = calcShadowAmount(textureDepth, ShadowCoord0);
+	
 	// Ambient
 	vec3 ambient = ambientStrength * lightColor * material.ambient;
 	
@@ -82,16 +86,8 @@ void main()
 	vec3 result = ambient;
 	if(lamberFactor > 0.0)
 	{
-		result = (diffuse + specular); 
+		result = (diffuse + specular * vec3(shadowAmount)); 
 	}
 	vec4 diffuseColor = texture2D(textureDiffuse, TexCoord0);
-	FragColor = vec4(result,1.0) * diffuseColor * (0.5+0.5*calcShadowAmount(textureDepth, ShadowCoord0));
-	
-	//float Depth = texture(textureDepth, ShadowCoord0.xy).r;
-    //FragColor = vec4(texture2D(textureDepth, ShadowCoord0.xy).r);
-	
-	// Show depth buffer
-	//FragColor = vec4(gl_FragCoord.z);
-	
-	//fragmentDepth = gl_FragCoord.z;
+	FragColor = vec4(result,1.0) * diffuseColor * (0.5+0.5*shadowAmount);
 }

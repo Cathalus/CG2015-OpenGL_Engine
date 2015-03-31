@@ -22,11 +22,12 @@ public:
 			std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 
 			Assimp::Importer* importer = new Assimp::Importer();
-			const aiScene* scene = importer->ReadFile(fName, aiProcess_Triangulate |
+			const aiScene* scene = importer->ReadFile(fName, 
+				aiProcess_Triangulate |
 				aiProcess_GenSmoothNormals |
-				aiProcess_JoinIdenticalVertices |
-				aiProcess_ImproveCacheLocality |
-				aiProcess_SortByPType | 
+				//aiProcess_JoinIdenticalVertices |
+				//aiProcess_ImproveCacheLocality |
+				//aiProcess_SortByPType | 
 				aiProcess_CalcTangentSpace);
 
 			Model* temp = new Model(scene);
