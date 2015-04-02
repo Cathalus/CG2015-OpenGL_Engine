@@ -11,7 +11,6 @@ void GameplayScene::init()
 	_entities.push_back(new Entity(_modelManager->getModel("plane")));
 	_entities.back()->setScale(5);
 	_entities.push_back(new Entity(_modelManager->getModel("house")));
-	_entities.push_back(new Entity(_modelManager->getModel("tree1")));
 	_lightSource = new Entity(_modelManager->getModel("cube"), _lightPos, glm::vec3(1, 1, 1), 0, 0.5f);
 }
 
@@ -124,13 +123,9 @@ void GameplayScene::draw(std::string shader)
 void GameplayScene::loadAssets()
 {
 	/* Textures */
-	_textureManager->loadTexture("forestTexture", "forestfloor.jpg");
-	//_textureManager->loadTexture("forestTextureNormal", "forest.png");
 
 	/* Models */
 	_modelManager->loadModel("plane", "plane/plane.obj");
-	_modelManager->loadModel("tree1", "cube/cube.obj");
-	//_modelManager->getModel("plane")->getMeshes()[0]->setNormalTexture(_textureManager->getTexture("forestTextureNormal"));
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("house", "house/house.obj");
 }
@@ -139,4 +134,6 @@ void GameplayScene::unloadAssets()
 {
 	// Unload Models
 	_modelManager->unloadModel("plane");
+	_modelManager->unloadModel("cube");
+	_modelManager->unloadModel("house");
 }

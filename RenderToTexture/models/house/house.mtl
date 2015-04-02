@@ -9,8 +9,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-//map_Kd house-wood-floor.jpg
-//map_Kn house-wood-floor-normal.jpg
+map_Kd house-wood-floor.jpg
+map_Kn house-wood-floor-normal.jpg
 
 newmtl Material
 Ns 2
@@ -20,5 +20,5 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-//map_Kd house-wood-frame.jpg
-//map_Kn house-wood-frame-normal.jpg
+map_Kd house-wood-frame.jpg
+map_Kn house-wood-frame-normal.jpg

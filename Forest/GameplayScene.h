@@ -26,8 +26,8 @@ private:
 	Entity* _lightSource;
 
 	// Light Settings
-	GLfloat _ambientStrength = 0.1f;
+	GLfloat _ambientStrength = 1.0f;
 	glm::vec3 _lightColor = glm::vec3(1,1,1);
-	glm::vec3 _lightPos = glm::vec3(10, 30, 0);
+	glm::vec3 _lightPos = glm::vec3(0, 30, 0);
 	glm::vec3 _lightDirection = glm::vec3(0, 0, 0) - _lightPos;
 };

@@ -27,7 +27,7 @@ uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 uniform float ambientStrength;
 uniform Material material;
-//uniform vec3 lightDirection;
+uniform vec3 lightDirection;
 
 vec3 calcBumpMap()
 {
@@ -53,16 +53,24 @@ float sampleShadowMap(sampler2D shadowMap, vec2 coords, float compare)
 	return step(compare, texture2D(shadowMap, coords.xy).r);
 }
 
-float calcShadowAmount(sampler2D shadowMap, vec4 shadowMapCoords)
+float calcShadowAmount(sampler2D shadowMap, vec4 shadowMapCoords, vec3 normal, vec3 lightDirection)
 {
+// Normal of the computed fragment, in camera space
+	vec3 n = normalize( normal );
+	// Direction of the light (from the fragment to the light)
+	vec3 l = normalize( lightDirection );
+	float cosTheta = clamp( dot( n,l) , 0,1 );
 	vec3 shadowMapCoords0 = (shadowMapCoords.xyz/shadowMapCoords.w)* vec3(0.5) + vec3(0.5);	// Depth-bias -1|1 to 0|1
-	return sampleShadowMap(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z);
+	//float bias = 0.005;
+	float bias = 0.005*tan(acos(cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
+	bias = clamp(bias, 0,0.01);
+	return sampleShadowMap(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z-bias);
 }
 
 void main()
 {
 	vec4 shadowCoordinateWdivide = ShadowCoord0 / ShadowCoord0.w;
-		
+	
 	// Ambient
 	vec3 ambient = ambientStrength * lightColor * material.ambient;
 	
@@ -71,6 +79,9 @@ void main()
 	vec3 normal = calcBumpMap();
 	float lamberFactor = max(dot(normal, lightDir), 0.0);
 	vec3 diffuse = lamberFactor * lightColor * material.diffuse;
+	
+	// Shadow
+	float shadowAmount = calcShadowAmount(textureDepth, ShadowCoord0, normal, lightDir);
 	
 	// Specular
 	float specularStrength = material.shininessStrength;
@@ -82,8 +93,8 @@ void main()
 	vec3 result = ambient;
 	if(lamberFactor > 0.0)
 	{
-		result = (diffuse + specular); 
+		result = (diffuse + specular * vec3(shadowAmount)); 
 	}
 	vec4 diffuseColor = texture2D(textureDiffuse, TexCoord0);
-	FragColor = vec4(result,1.0) * diffuseColor * (0.5+0.5*calcShadowAmount(textureDepth, ShadowCoord0));
+	FragColor = vec4(result,1.0) * diffuseColor * (0.5+0.5*shadowAmount);
 }

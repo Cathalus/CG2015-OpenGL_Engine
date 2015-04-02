@@ -33,18 +33,21 @@ public:
 
 	virtual inline glm::mat4 getCameraProjection() const
 	{
+		glm::mat4 result(1.0f);
 		switch (_type)
 		{
 			case ORTHO:
-				return _perspective * glm::lookAt(_position,
-												  _position + _forward,
-													_up);
-				break;
+				result = glm::rotate(_perspective, glm::radians(90.0f), glm::vec3(0, 1, 0));
+				result = glm::rotate(result, glm::radians(20.0f), glm::vec3(0, 0, 1));
+				result = glm::translate(result, glm::vec3(0, 5, 0));
+				return glm::translate(_perspective, glm::vec3(0, 0, 0)) *glm::lookAt(_position,
+					_position + _forward,
+					_up);
+				//return result;
 			case PERSPECTIVE:
 				return _perspective * glm::lookAt(_position,
 					_position + _forward,
 					_up);
-				break;
 		}
 	}
 	virtual inline void setPosition(glm::vec3 pos) { _position = pos; };
