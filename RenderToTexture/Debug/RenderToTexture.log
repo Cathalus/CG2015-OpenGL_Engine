@@ -1,7 +1,7 @@
-﻿Build started 02.04.2015 13:58:45.
-     1>Project "C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\RenderToTexture\RenderToTexture.vcxproj" on node 2 (Build target(s)).
+﻿Build started 02.04.2015 22:32:03.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\RenderToTexture\RenderToTexture.vcxproj" on node 2 (Build target(s)).
      1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\Debug\RenderToTexture.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib glEngine.lib assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\Debug\RenderToTexture.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\Debug\RenderToTexture.lib" /MACHINE:X86 Debug\init.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Debug\RenderToTexture.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib glEngine.lib assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Debug\RenderToTexture.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Debug\RenderToTexture.lib" /MACHINE:X86 Debug\init.obj
          Debug\RenderToTextureScene.obj
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>glEngine.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewDrawBuffers imported
@@ -47,10 +47,10 @@
      1>glEngine.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
      1>glEngine.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
      1>glEngine.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\Debug\vc120.pdb'; linking object as if no debug info
-         RenderToTexture.vcxproj -> C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\Debug\RenderToTexture.exe
-     1>Done Building Project "C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\RenderToTexture\RenderToTexture.vcxproj" (Build target(s)).
+     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Debug\vc120.pdb'; linking object as if no debug info
+         RenderToTexture.vcxproj -> C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Debug\RenderToTexture.exe
+     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\RenderToTexture\RenderToTexture.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.43
+Time Elapsed 00:00:00.54

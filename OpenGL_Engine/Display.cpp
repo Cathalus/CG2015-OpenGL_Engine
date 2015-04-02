@@ -13,10 +13,12 @@ Display::Display(std::string title, GLuint width, GLuint height, GLuint flags)
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);											// Number of bits for alpha
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);										// Size of the buffer (3*8 = 32)
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);											// Size of the depth buffer (3*8 = 32) http://www.opengl.org/archives/resources/faq/technical/depthbuffer.htm
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);										// Activtate Double Buffering
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);										// Activate Double Buffering
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);								// Set Major Version
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);								// Set Minor Version
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);		// Set Core Profile
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);									// Enable Multisampling (MSAA)
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);									// 4xMSAA
 
 
 	/* Create Window */
@@ -32,6 +34,7 @@ Display::Display(std::string title, GLuint width, GLuint height, GLuint flags)
 	/* Enable OpenGL Features */
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glEnable(GL_MULTISAMPLE);
 
 	SDL_GetWindowSize(_window, _width, _height);
 }

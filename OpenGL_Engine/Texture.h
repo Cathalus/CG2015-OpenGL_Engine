@@ -6,8 +6,9 @@
 class Texture
 {
 public:
-	Texture(const std::string& fileName, GLenum textureTarget = GL_TEXTURE_2D);
-	Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format);
+	// default: trilinear filtering
+	Texture(const std::string& fileName, GLenum textureTarget = GL_TEXTURE_2D, GLfloat filter = GL_LINEAR_MIPMAP_LINEAR);
+	Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLfloat filter = GL_LINEAR_MIPMAP_LINEAR);
 	void Bind(unsigned int unit);
 	inline GLuint* getID() { return _texture; }
 	inline GLenum getTextureTarget() { return _textureTarget;  }

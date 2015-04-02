@@ -1,39 +1,10 @@
-﻿Build started 02.04.2015 13:58:38.
-     1>Project "C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
+﻿Build started 02.04.2015 22:29:30.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp Framebuffer.cpp GLTools.cpp obj_loader.cpp shaderattributes.cpp shadermanager.cpp shaderuniforms.cpp Texture.cpp tiny_obj_loader.cpp
-         tiny_obj_loader.cpp
-         Texture.cpp
-         shaderuniforms.cpp
-         shadermanager.cpp
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\shadermanager.cpp(17): warning C4244: 'argument' : conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\shadermanager.cpp(175): warning C4018: '<' : signed/unsigned mismatch
-         shaderattributes.cpp
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\shaderattributes.cpp(56): warning C4101: 'tempEBOIndex' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\shaderattributes.cpp(79): warning C4101: 'tempEBOIndex' : unreferenced local variable
-         obj_loader.cpp
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\obj_loader.cpp(378): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
-         GLTools.cpp
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(13): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(773): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(795): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(705): warning C4101: 'iY' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(704): warning C4101: 'nX' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(705): warning C4101: 'iZ' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(703): warning C4101: 'vZ' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(705): warning C4101: 'iX' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(704): warning C4101: 'nZ' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(704): warning C4101: 'nY' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(703): warning C4101: 'vY' : unreferenced local variable
-     1>c:\users\cathalus\desktop\cg2015-opengl_engine-f30c84bc74f92bb07a44c1d1553a373668122fde\opengl_engine\gltools.cpp(703): warning C4101: 'vX' : unreferenced local variable
-         Framebuffer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp
          Display.cpp
-         Generating Code...
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt stb_image.c
-         stb_image.c
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\\lib\glEngine.lib" /NOLOGO Debug\Display.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib\glEngine.lib" /NOLOGO Debug\Display.obj
          Debug\Framebuffer.obj
          Debug\GLTools.obj
          Debug\obj_loader.obj
@@ -43,9 +14,9 @@
          Debug\stb_image.obj
          Debug\Texture.obj
          Debug\tiny_obj_loader.obj
-         OpenGL_Engine.vcxproj -> C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\\lib\glEngine.lib
-     1>Done Building Project "C:\Users\cathalus\Desktop\CG2015-OpenGL_Engine-f30c84bc74f92bb07a44c1d1553a373668122fde\OpenGL_Engine\OpenGL_Engine.vcxproj" (Build target(s)).
+         OpenGL_Engine.vcxproj -> C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib\glEngine.lib
+     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:06.13
+Time Elapsed 00:00:00.73

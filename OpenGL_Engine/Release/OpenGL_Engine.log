@@ -1,0 +1,28 @@
+﻿Build started 02.04.2015 21:53:08.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp Framebuffer.cpp GLTools.cpp obj_loader.cpp shaderattributes.cpp shadermanager.cpp shaderuniforms.cpp Texture.cpp tiny_obj_loader.cpp
+         Display.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Display.h(4): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
+         Framebuffer.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Framebuffer.h(2): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
+         GLTools.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\GLTools.h(44): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         obj_loader.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\obj_loader.h(2): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
+         shaderattributes.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\shaderattributes.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         shadermanager.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\shaderuniforms.h(5): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         shaderuniforms.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\shaderuniforms.h(5): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         Texture.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\texture.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         tiny_obj_loader.cpp
+     1>tiny_obj_loader.cpp(462): error C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(304) : see declaration of 'sscanf'
+     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.90

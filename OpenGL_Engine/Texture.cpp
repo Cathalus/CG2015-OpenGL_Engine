@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-Texture::Texture(const std::string& fileName, GLenum textureTarget)
+Texture::Texture(const std::string& fileName, GLenum textureTarget, GLfloat filter)
 {
 	int width, height, numComponents;
 	unsigned char* imageData = stbi_load(std::string("textures/").append(fileName).c_str(), &width, &height, &numComponents, 4);
@@ -24,21 +24,36 @@ Texture::Texture(const std::string& fileName, GLenum textureTarget)
 
 	// GLint level = mipmapping
 	glTexImage2D(_textureTarget, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-	glGenerateMipmap(_textureTarget);
 
 	// texture interpolation (filtering)
-	glTexParameteri(_textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);	// minification
-	glTexParameteri(_textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	// magnification
+	glTexParameteri(_textureTarget, GL_TEXTURE_MIN_FILTER, filter);	// minification
+	glTexParameteri(_textureTarget, GL_TEXTURE_MAG_FILTER, filter);	// magnification
+
+	if (filter == GL_NEAREST_MIPMAP_LINEAR ||
+		filter == GL_NEAREST_MIPMAP_NEAREST ||
+		filter == GL_LINEAR_MIPMAP_LINEAR ||
+		filter == GL_LINEAR_MIPMAP_NEAREST)
+	{
+		// Generates MipMap and sets anisotropic filtering to a maximum of 8
+		glGenerateMipmap(_textureTarget);
+		// Check if anisotropic filtering is supported
+		GLfloat maxAnisotropy;
+		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropy);
+		glTexParameterf(_textureTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAnisotropy);
+	}
+	else{
+		glTexParameteri(_textureTarget, GL_TEXTURE_BASE_LEVEL, 0);
+		glTexParameteri(_textureTarget, GL_TEXTURE_MAX_LEVEL, 0);
+	}
 
 	// Free CPU
 	stbi_image_free(imageData);
 
-	std::cout << "Texture " << fileName << " loaded!" << std::endl;
 	_width = width;
 	_height = height;
 }
 
-Texture::Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format)
+Texture::Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum internalFormat, GLenum format, GLfloat filter)
 {
 	glGenTextures(1, _texture);
 	_textureTarget = textureTarget;
