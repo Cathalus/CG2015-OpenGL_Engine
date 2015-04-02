@@ -4,6 +4,8 @@
 
 int main()
 {
+
+
 	/* General setup */
 	Display* display = new Display("Render to Texture", 1280, 720);
 
@@ -24,6 +26,10 @@ int main()
 	shaderManager->createShaderProgram("lamp", { "lamp.vert", "lamp.frag" });
 	shaderManager->createShaderProgram("mirror", { "mirror.vert", "mirror.frag" });
 	shaderManager->createShaderProgram("shadowMap", { "main_shadowmap.vert", "main_shadowmap.frag" });
+
+	modelManager->setTextureManager(textureManager);
+	textureManager->loadTexture("default_normal", "default_normal.jpg");
+	textureManager->loadTexture("default", "default.png");
 
 	/* Scene Setup */
 	RenderToTextureScene scene(display, shaderManager, textureManager, modelManager, uniforms);

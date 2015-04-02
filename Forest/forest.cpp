@@ -6,7 +6,7 @@ int main()
 {
 	/* General Setup */
 	Display* display = new Display("The Forest", 1280, 720);
-	Camera* mainCamera = new Camera(glm::vec3(0, 0, -3.5f), 90, display->getWidth() / display->getHeight(), 0.001f, 500);
+	Camera* mainCamera = new Camera(glm::vec3(0, 0, -3.5f), 90, display->getWidth() / display->getHeight(), 1, 500);
 	int targetFPS = 60;
 	int fpsMill = 1000 / targetFPS;
 	int currentFrameSpeed = 0;

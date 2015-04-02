@@ -26,8 +26,8 @@ public:
 			const aiScene* scene = importer->ReadFile(fName, 
 				aiProcess_Triangulate |
 				aiProcess_GenSmoothNormals |
-				aiProcess_OptimizeMeshes |
-				aiProcess_OptimizeGraph |
+				//aiProcess_OptimizeMeshes |
+				//aiProcess_OptimizeGraph |
 				//aiProcess_JoinIdenticalVertices |
 				aiProcess_ImproveCacheLocality |
 				//aiProcess_SortByPType | 
