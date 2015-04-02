@@ -21,9 +21,11 @@ private:
 	GLfloat _yaw = -90.0f, _pitch = 0;
 	GLfloat _ambientStrength = 0.1f;
 	GLfloat _acc = 0;
-	glm::vec3 _lightColor = glm::vec3(0);
+	glm::vec3 _lightColor = glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255);
+	//glm::vec3 _lightColor = glm::vec3((float)255 / 255, (float)255 / 255, (float)255 / 255);
 	glm::vec3 _lightPos = glm::vec3(0, 40, 0);
 	glm::vec3 _lightDirection = glm::vec3(0,0,0) - _lightPos;
+	glm::vec3 _shadowTexelSize;
 	std::vector<Entity*> _entities;
 	Entity* _lamp;
 	float _speed = 20.0f;

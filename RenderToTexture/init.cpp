@@ -5,7 +5,7 @@
 int main()
 {
 	/* General setup */
-	Display* display = new Display("Render to Texture", 1280, 720, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	Display* display = new Display("Render to Texture", 1280, 720);
 
 	ShaderManager* shaderManager = new ShaderManager();
 	TextureManager* textureManager = new TextureManager();

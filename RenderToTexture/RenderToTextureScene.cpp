@@ -129,7 +129,6 @@ void RenderToTextureScene::update(float delta)
 	float r = glm::abs(cos(_acc * 3));
 	float g = glm::abs(sin(_acc * 5));
 	float b = glm::abs(sin(_acc * 2));
-	_lightColor = glm::vec3(0.98f, 0.98f, 0.825f);
 
 	// _player camera translation
 	_player->setTranslation(_cameras[0]->getPosition());
@@ -152,7 +151,8 @@ void RenderToTextureScene::render()
 {
 	// Render to Texture (Mirror)
 	_rttBuffer.bindForWriting();
-	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
 	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
 	draw(true);
 
@@ -160,25 +160,36 @@ void RenderToTextureScene::render()
 	temp = _activeCamera;
 
 	// Shadow
-	glCullFace(GL_FRONT);
+	glCullFace(GL_FRONT);			// remove peter panning
 	_activeCamera = _shadowCamera;
 	_shadowBuffer.bindForWriting();
-	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
 	_uniformManager->updateUniformData("MVP", _shadowCamera->getCameraProjection());
 	drawShadowMap("shadowMap");
 	_activeCamera = temp;
 	glCullFace(GL_BACK);
 
+	// Depth-bias -1|1 to 0|1
+	glm::mat4 biasMatrix(
+		0.5, 0.0, 0.0, 0.0,
+		0.0, 0.5, 0.0, 0.0,
+		0.0, 0.0, 0.5, 0.0,
+		0.5, 0.5, 0.5, 1.0
+	);
+
 	// Render to Window
 	_display->bindRenderTarget();
-	_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
-	_uniformManager->updateUniformData("DepthMVP", _shadowCamera->getCameraProjection());
+	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
+	_uniformManager->updateUniformData("DepthMVP", biasMatrix*_shadowCamera->getCameraProjection());
 	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
 	draw(true); 
 }
 
 void RenderToTextureScene::drawShadowMap(std::string shader)
 {	
+	_uniformManager->updateUniformData("shadowTexelSize", _shadowTexelSize);
 	for (Entity* e : _entities)
 	{
 		_uniformManager->updateUniformData("model", *e->getCombinedMatrix());
@@ -200,6 +211,7 @@ void RenderToTextureScene::draw(bool drawLightSource)
 	_uniformManager->updateUniformData("lightDirection", _lightDirection);
 	_uniformManager->updateUniformData("ambientStrength", _ambientStrength);
 	_uniformManager->updateUniformData("viewPosition", _activeCamera->getPosition());
+	_uniformManager->updateUniformData("shadowTexelSize", _shadowTexelSize);
 
 	/* Render Entities */
 	for (Entity* e : _entities)
@@ -241,6 +253,7 @@ void RenderToTextureScene::init()
 	/* Shadow Buffering */
 	_shadowBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_DEPTH_COMPONENT24, GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT, true);
 	_shadowTexture = _shadowBuffer.getTexture();
+	_shadowTexelSize = glm::vec3(1.0f / 1280.0f, 1.0f / 720.0f, 0.0f);
 		
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("plane", "plane/plane.obj");

@@ -12,5 +12,5 @@ uniform sampler2D textureDepth;
 
 void main()
 {
-	FragColor = texture2D(textureDiffuse, TexCoord0);	
+	FragColor = texture2D(textureDiffuse, TexCoord0)+vec4(0.05,0.05,0.05,0.05);	
 }

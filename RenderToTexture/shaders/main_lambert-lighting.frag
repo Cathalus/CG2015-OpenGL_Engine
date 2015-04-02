@@ -28,6 +28,7 @@ uniform vec3 viewPosition;
 uniform float ambientStrength;
 uniform Material material;
 uniform vec3 lightDirection;
+uniform vec3 shadowTexelSize;
 
 vec3 calcBumpMap()
 {
@@ -53,18 +54,50 @@ float sampleShadowMap(sampler2D shadowMap, vec2 coords, float compare)
 	return step(compare, texture2D(shadowMap, coords.xy).r);
 }
 
+/* Bilinear Filtering 
+sampler2DShadow is not supported by all devices -> software implementation of bilinear filtering */
+float sampleShadowMapLinear(sampler2D shadowMap, vec2 coords, float compare, vec2 texelSize)
+{
+	vec2 pixelPos = coords/texelSize + vec2(0.5);
+	vec2 fracPart = fract(pixelPos);
+	vec2 startTexel = (pixelPos - fracPart) * texelSize;
+	
+	float bottomLeftTexel 	= sampleShadowMap(shadowMap, startTexel, compare);
+	float bottomRightTexel 	= sampleShadowMap(shadowMap, startTexel + vec2(texelSize.x, 0.0), compare);
+	float topLeftTexel 		= sampleShadowMap(shadowMap, startTexel + vec2(0.0, texelSize.y), compare);
+	float topRightTexel 	= sampleShadowMap(shadowMap, startTexel + texelSize, compare);
+	
+	// bilinear interpolation
+	float leftTexel 	= mix(bottomLeftTexel, topLeftTexel, fracPart.y);
+	float rightTexel	= mix(bottomRightTexel, topRightTexel, fracPart.y);
+	float result 		= mix(leftTexel, rightTexel, fracPart.x);
+	return result;
+}
+
+// Percentage Close Filtering (PCF)
+float sampleShadowMapPCF(sampler2D shadowMap, vec2 coords, float compare, vec2 texelSize)
+{
+	const float NUM_SAMPLES = 4.0f;
+	const float SAMPLES_START = (NUM_SAMPLES-1.0f)/2.0f;
+	
+	float result = 0.0f;
+	
+	for(float y = -SAMPLES_START; y <= SAMPLES_START; y += 1.0f)
+	{
+		for(float x = -SAMPLES_START; x <= SAMPLES_START; x += 1.0f)
+		{
+			vec2 offsetCoords = vec2(x,y)*texelSize;
+			result += sampleShadowMapLinear(shadowMap, coords + offsetCoords, compare, texelSize);
+		}
+	}
+	return result/pow(NUM_SAMPLES,2);
+}
+
 float calcShadowAmount(sampler2D shadowMap, vec4 shadowMapCoords, vec3 normal, vec3 lightDirection)
 {
-// Normal of the computed fragment, in camera space
-	vec3 n = normalize( normal );
-	// Direction of the light (from the fragment to the light)
-	vec3 l = normalize( lightDirection );
-	float cosTheta = clamp( dot( n,l) , 0,1 );
-	vec3 shadowMapCoords0 = (shadowMapCoords.xyz/shadowMapCoords.w)* vec3(0.5) + vec3(0.5);	// Depth-bias -1|1 to 0|1
-	//float bias = 0.005;
-	float bias = 0.005*tan(acos(cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
-	bias = clamp(bias, 0,0.01);
-	return sampleShadowMap(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z-bias);
+	vec3 shadowMapCoords0 = (shadowMapCoords.xyz/shadowMapCoords.w);	
+	float bias = (shadowTexelSize.x);
+	return sampleShadowMapPCF(shadowMap, shadowMapCoords0.xy, shadowMapCoords0.z-bias, shadowTexelSize.xy);
 }
 
 void main()
