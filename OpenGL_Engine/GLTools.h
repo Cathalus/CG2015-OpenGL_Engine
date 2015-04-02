@@ -50,6 +50,7 @@ SUCH DAMAGE.
 #include <assimp/postprocess.h>     // Post processing fla
 #include <ASSIMP\material.h>
 #include <ASSIMP\cfileio.h>
+#include "TextureManager.h"
 
 class ShaderAttributes;
 
@@ -67,6 +68,6 @@ void gltMakeCube(ShaderAttributes &pA, GLfloat fRadius);
 void gltMakeTriangle(ShaderAttributes &pA, glm::vec3 a, glm::vec3 b, glm::vec3 c);
 void gltMakeTestObject(ShaderAttributes &pA);
 void gltUploadModel(ShaderAttributes &pA, std::vector<tinyobj::shape_t> &shape);
-void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene);
+void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene, TextureManager* texManager);
 void gltMakePlane(ShaderAttributes &pA);
 #endif

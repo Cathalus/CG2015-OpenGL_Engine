@@ -16,6 +16,11 @@ int main()
 	TextureManager* textureManager = new TextureManager();
 	ShaderUniforms* uniforms = new ShaderUniforms();
 	ModelManager* modelManager = new ModelManager();
+	modelManager->setTextureManager(textureManager);
+
+	/* Load default textures */
+	textureManager->loadTexture("default_normal", "default_normal.jpg");
+	textureManager->loadTexture("default", "default.png");
 
 	/* Shader Setup */
 	shaderManager->createShaderProgram("game", { "game.vert", "game.frag" });
