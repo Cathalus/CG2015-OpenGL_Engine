@@ -28,9 +28,6 @@ private:
 	// Light Settings
 	GLfloat _ambientStrength = 1.0f;
 	glm::vec3 _lightColor = glm::vec3(1,1,1);
-	glm::vec3 _lightPos = glm::vec3(0, 160, 0);
+	glm::vec3 _lightPos = glm::vec3(0, 30, 0);
 	glm::vec3 _lightDirection = glm::vec3(0, 0, 0) - _lightPos;
-
-	// Cameras
-	Camera* _shadowCamera;
 };

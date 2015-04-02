@@ -11,8 +11,6 @@ void GameplayScene::init()
 	_entities.push_back(new Entity(_modelManager->getModel("plane")));
 	_entities.back()->setScale(5);
 	_entities.push_back(new Entity(_modelManager->getModel("house")));
-	_entities.push_back(new Entity(_modelManager->getModel("level")));
-	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(15,20,25)));
 	_lightSource = new Entity(_modelManager->getModel("cube"), _lightPos, glm::vec3(1, 1, 1), 0, 0.5f);
 }
 
@@ -94,8 +92,6 @@ void GameplayScene::update(float delta)
 	{
 		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, -delta*_speed, 0));
 	}
-
-	_lightSource->setTranslation(_lightPos);
 }
 
 void GameplayScene::render()
@@ -132,7 +128,6 @@ void GameplayScene::loadAssets()
 	_modelManager->loadModel("plane", "plane/plane.obj");
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("house", "house/house.obj");
-	_modelManager->loadModel("level", "level/main.obj");
 }
 
 void GameplayScene::unloadAssets()
@@ -141,5 +136,4 @@ void GameplayScene::unloadAssets()
 	_modelManager->unloadModel("plane");
 	_modelManager->unloadModel("cube");
 	_modelManager->unloadModel("house");
-	_modelManager->unloadModel("level");
 }

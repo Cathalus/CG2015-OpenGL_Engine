@@ -255,7 +255,7 @@ void RenderToTextureScene::init()
 	_billboard->setScale(1);
 
 	/* Set up mirror camera */
-	Camera* mirrorCamera = new Camera(_billboard->getPosition(), 60, 1, 0.1, 500);
+	Camera* mirrorCamera = new Camera(_billboard->getPosition(), 90, 1, 0.1, 500);
 	glm::vec3 forward = glm::vec3(-1, 0, 0);
 	mirrorCamera->setForward(forward);
 	_mirrorCamera = mirrorCamera;
