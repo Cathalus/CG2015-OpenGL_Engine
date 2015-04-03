@@ -59,6 +59,18 @@ void RenderToTextureScene::update(float delta)
 		_ambientStrength -= delta;
 	}
 
+	if (currentKeyStates[SDL_SCANCODE_L])
+	{
+		if (!_flashLightKeyLock)
+		{
+			_flashLightActive = !_flashLightActive;
+			_flashLightKeyLock = true;
+		}
+	}
+	else{
+		_flashLightKeyLock = false;
+	}
+
 	if (currentKeyStates[SDL_SCANCODE_UP])
 	{
 		_directionalLight->translate(glm::vec3(-delta*_speed,0,0));
@@ -75,11 +87,11 @@ void RenderToTextureScene::update(float delta)
 	{
 		_directionalLight->translate(glm::vec3(0, 0, -delta*_speed));
 	}
-	if (currentKeyStates[SDL_SCANCODE_O])
+	if (currentKeyStates[SDL_SCANCODE_PAGEUP])
 	{
 		_directionalLight->translate(glm::vec3(0, delta*_speed, 0));
 	}
-	if (currentKeyStates[SDL_SCANCODE_L])
+	if (currentKeyStates[SDL_SCANCODE_PAGEDOWN])
 	{
 		_directionalLight->translate(glm::vec3(0, -delta*_speed, 0));
 	}
@@ -146,20 +158,36 @@ void RenderToTextureScene::update(float delta)
 	// Update light Direction
 	//_shadowCamera->setPosition(_lightPos);
 	_shadowCamera->setForward(glm::normalize(_billboard->getPosition() - _directionalLight->getPosition()));
+
+	_flashLight->setPosition(_cameras[0]->getPosition());
+	_flashLight->setDirection(_cameras[0]->getForward());
 }
 
 void RenderToTextureScene::render()
 {
-	// Render to Texture (Mirror)
-	_rttBuffer.bindForWriting();
-	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
-	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
-	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
-	draw(true);
+	for (LightSource* lightSource : _lights)
+	{
+		if (lightSource->getType() == LightType::DIRECTIONAL)
+		{
+			_uniformManager->updateUniformData("directionalLight.color", _directionalLight->getColor());
+			_uniformManager->updateUniformData("directionalLight.direction", _directionalLight->getDirection());
+			_uniformManager->updateUniformData("lampColor", _directionalLight->getColor());
+		}
+		else if (lightSource->getType() == LightType::SPOT)
+		{
+			_uniformManager->updateUniformData("spotLight.color", _flashLight->getColor());
+			_uniformManager->updateUniformData("spotLight.position", _flashLight->getPosition());
+			_uniformManager->updateUniformData("spotLight.direction", _flashLight->getDirection());
+			_uniformManager->updateUniformData("spotLight.cutOff", _flashLight->getCutOff());
+			_uniformManager->updateUniformData("spotLight.cutOuterOff", _flashLight->getOuterCutOff());
+			_uniformManager->updateUniformData("spotLight.constant", _flashLight->getConstant());
+			_uniformManager->updateUniformData("spotLight.linear", _flashLight->getLinear());
+			_uniformManager->updateUniformData("spotLight.quadratic", _flashLight->getQuadratic());
+			_uniformManager->updateUniformData("spotLight.active", _flashLightActive);
+		}
+	}
 
 	Camera* temp = _activeCamera;
-	temp = _activeCamera;
-
 	// Shadow
 	glCullFace(GL_FRONT);			// remove peter panning
 	_activeCamera = _shadowCamera;
@@ -170,6 +198,15 @@ void RenderToTextureScene::render()
 	drawShadowMap("shadowMap");
 	_activeCamera = temp;
 	glCullFace(GL_BACK);
+
+	// Render to Texture (Mirror)
+	_rttBuffer.bindForWriting();
+	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
+	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
+	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
+	draw(true);
+
+	temp = _activeCamera;
 
 	// Depth-bias -1|1 to 0|1
 	glm::mat4 biasMatrix(
@@ -207,12 +244,10 @@ void RenderToTextureScene::draw(bool drawLightSource)
 	_uniformManager->updateUniformData("textureDepth", 11);
 
 	/* Update Uniforms */
-	_uniformManager->updateUniformData("lightColor", _directionalLight->getColor());
-	_uniformManager->updateUniformData("lightPosition", _directionalLight->getPosition());
-	_uniformManager->updateUniformData("lightDirection", _directionalLight->getDirection());
 	_uniformManager->updateUniformData("ambientStrength", _ambientStrength);
 	_uniformManager->updateUniformData("viewPosition", _activeCamera->getPosition());
 	_uniformManager->updateUniformData("shadowTexelSize", _shadowTexelSize);
+	
 
 	/* Render Entities */
 	for (Entity* e : _entities)
@@ -265,7 +300,7 @@ void RenderToTextureScene::init()
 	_billboard = new Entity(_modelManager->getModel("screen"));
 	_billboard->addRotation(glm::vec3(1, 0, 0), -90);
 	_billboard->addRotation(glm::vec3(0, 0, 1), 90);
-	_billboard->setTranslation(glm::vec3(10 , 8, 0));
+	_billboard->setTranslation(glm::vec3(10 , 10, 0));
 	_billboard->setScale(1);
 
 	/* Set up mirror camera */
@@ -295,7 +330,14 @@ void RenderToTextureScene::init()
 	
 	_lamp = new Entity(_modelManager->getModel("cube"));
 
+	/* Initialize Lights */
 	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(0, 40, 0), glm::vec3(1, 0, 0));
+	_lights.push_back(_directionalLight);
+	_flashLight = new SpotLight(glm::vec3(1, 0, 0), _activeCamera->getPosition(), _activeCamera->getForward(), 
+		glm::cos(glm::radians(12.5f)),
+		glm::cos(glm::radians(13.5f)),
+		1.0f,0.07f,0.017f);
+	_lights.push_back(_flashLight);
 }
 
 void RenderToTextureScene::loadAssets()

@@ -41,4 +41,8 @@ private:
 	Texture* _shadowTexture;
 
 	DirectionalLight* _directionalLight;
+	SpotLight* _flashLight;
+
+	bool _flashLightActive = false;
+	bool _flashLightKeyLock = false;
 };

@@ -34,3 +34,41 @@ public:
 		LightSource(lightColor, lightPosition, lightDirection) {};
 	inline LightType getType() { return LightType::DIRECTIONAL; }
 };
+
+class SpotLight : public LightSource
+{
+public:
+	SpotLight(glm::vec3 lightColor, glm::vec3 lightPosition, glm::vec3 lightDirection, float cutOff, float outerCutOff, float constant, float linear, float quadratic) :
+		LightSource(lightColor, lightPosition, lightDirection),
+		_cutOff(cutOff),
+		_outerCutOff(outerCutOff),
+		_constant(constant),
+		_linear(linear),
+		_quadratic(quadratic) {};
+	inline LightType getType() { return LightType::SPOT; }
+	inline float getCutOff() { return _cutOff; }
+	inline float getOuterCutOff() { return _outerCutOff; }
+	inline float getConstant() { return _constant; }
+	inline float getLinear() { return _linear; }
+	inline float getQuadratic() { return _quadratic; }
+private:
+	float _cutOff;
+	float _outerCutOff;
+	float _constant;
+	float _linear;
+	float _quadratic;
+};
+
+class PointLight : public LightSource
+{
+public:
+	PointLight(glm::vec3 lightColor, glm::vec3 lightPosition, glm::vec3 lightDirection, float constant, float linear, float quadratic) :
+		LightSource(lightColor, lightPosition, lightDirection),
+		_constant(constant),
+		_linear(linear),
+		_quadratic(quadratic) {};
+private:
+	float _constant;
+	float _linear;
+	float _quadratic;
+};
