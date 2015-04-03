@@ -23,8 +23,7 @@ private:
 	GLfloat _acc = 0;
 	glm::vec3 _lightColor = glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255);
 	//glm::vec3 _lightColor = glm::vec3((float)255 / 255, (float)255 / 255, (float)255 / 255);
-	glm::vec3 _lightPos = glm::vec3(0, 40, 0);
-	glm::vec3 _lightDirection = glm::vec3(0,0,0) - _lightPos;
+	glm::vec3 _lightDirection;
 	glm::vec3 _shadowTexelSize;
 	std::vector<Entity*> _entities;
 	Entity* _lamp;
@@ -40,4 +39,6 @@ private:
 
 	Framebuffer _shadowBuffer;
 	Texture* _shadowTexture;
+
+	DirectionalLight* _directionalLight;
 };

@@ -78,6 +78,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="GLTools.h" />
+    <ClInclude Include="LightSource.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="obj_loader.h" />

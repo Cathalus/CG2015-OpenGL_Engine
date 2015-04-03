@@ -61,27 +61,27 @@ void RenderToTextureScene::update(float delta)
 
 	if (currentKeyStates[SDL_SCANCODE_UP])
 	{
-		_lightPos += glm::vec3(-delta*_speed,0,0);
+		_directionalLight->translate(glm::vec3(-delta*_speed,0,0));
 	}
 	if (currentKeyStates[SDL_SCANCODE_DOWN])
 	{
-		_lightPos += glm::vec3(delta*_speed, 0, 0);
+		_directionalLight->translate(glm::vec3(delta*_speed, 0, 0));
 	}
 	if (currentKeyStates[SDL_SCANCODE_LEFT])
 	{
-		_lightPos += glm::vec3(0, 0, delta*_speed);
+		_directionalLight->translate(glm::vec3(0, 0, delta*_speed));
 	}
 	if (currentKeyStates[SDL_SCANCODE_RIGHT])
 	{
-		_lightPos += glm::vec3(0, 0, -delta*_speed);
+		_directionalLight->translate(glm::vec3(0, 0, -delta*_speed));
 	}
 	if (currentKeyStates[SDL_SCANCODE_O])
 	{
-		_lightPos += glm::vec3(0, delta*_speed, 0);
+		_directionalLight->translate(glm::vec3(0, delta*_speed, 0));
 	}
 	if (currentKeyStates[SDL_SCANCODE_L])
 	{
-		_lightPos += glm::vec3(0, -delta*_speed, 0);
+		_directionalLight->translate(glm::vec3(0, -delta*_speed, 0));
 	}
 
 	if (currentKeyStates[SDL_SCANCODE_1])
@@ -101,6 +101,7 @@ void RenderToTextureScene::update(float delta)
 
 	/* Control light stuff*/
 	_ambientStrength = glm::clamp(_ambientStrength, 0.0f, 1.0f);
+	_directionalLight->setDirection(glm::normalize(glm::vec3(0, 0, 0) - _directionalLight->getPosition()));
 
 	glm::vec3 fwd;
 	fwd.x = cos(glm::radians(_yaw)) * cos(glm::radians(_pitch));
@@ -133,7 +134,7 @@ void RenderToTextureScene::update(float delta)
 	// _player camera translation
 	_player->setTranslation(_cameras[0]->getPosition());
 
-	_lamp->setTranslation(_lightPos);
+	_lamp->setTranslation(_directionalLight->getPosition());
 	_mirrorCamera->setPosition(_billboard->getPosition());
 
 	glm::vec3 mainCam = _cameras[0]->getPosition();
@@ -144,7 +145,7 @@ void RenderToTextureScene::update(float delta)
 
 	// Update light Direction
 	//_shadowCamera->setPosition(_lightPos);
-	_shadowCamera->setForward(glm::normalize(_billboard->getPosition() - _lightPos));
+	_shadowCamera->setForward(glm::normalize(_billboard->getPosition() - _directionalLight->getPosition()));
 }
 
 void RenderToTextureScene::render()
@@ -206,9 +207,9 @@ void RenderToTextureScene::draw(bool drawLightSource)
 	_uniformManager->updateUniformData("textureDepth", 11);
 
 	/* Update Uniforms */
-	_uniformManager->updateUniformData("lightColor", _lightColor);
-	_uniformManager->updateUniformData("lightPosition", _lightPos);
-	_uniformManager->updateUniformData("lightDirection", _lightDirection);
+	_uniformManager->updateUniformData("lightColor", _directionalLight->getColor());
+	_uniformManager->updateUniformData("lightPosition", _directionalLight->getPosition());
+	_uniformManager->updateUniformData("lightDirection", _directionalLight->getDirection());
 	_uniformManager->updateUniformData("ambientStrength", _ambientStrength);
 	_uniformManager->updateUniformData("viewPosition", _activeCamera->getPosition());
 	_uniformManager->updateUniformData("shadowTexelSize", _shadowTexelSize);
@@ -293,6 +294,8 @@ void RenderToTextureScene::init()
 	_entities.push_back(plane);
 	
 	_lamp = new Entity(_modelManager->getModel("cube"));
+
+	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(0, 40, 0), glm::vec3(1, 0, 0));
 }
 
 void RenderToTextureScene::loadAssets()

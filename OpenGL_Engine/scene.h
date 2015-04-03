@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "ModelManager.h"
+#include "LightSource.h"
 
 class Scene
 {
@@ -27,6 +28,7 @@ public:
 protected:
 	Camera* _activeCamera;
 	std::vector<Camera*> _cameras;
+	std::vector<LightSource*> _lights;
 	Display* _display;
 	ShaderManager* _shaderManager;
 	TextureManager* _textureManager;

@@ -20,7 +20,7 @@ int main()
 	int currentFrameSpeed = 0;
 	
 	/* Shader Setup */
-	shaderManager->createShaderProgram("main", { "main_lambert-lighting.vert", "main_lambert-lighting.frag" });
+	shaderManager->createShaderProgram("main", { "main_new-lighting.vert", "main_new-lighting.frag" });
 	shaderManager->createShaderProgram("lamp", { "lamp.vert", "lamp.frag" });
 	shaderManager->createShaderProgram("mirror", { "mirror.vert", "mirror.frag" });
 	shaderManager->createShaderProgram("shadowMap", { "main_shadowmap.vert", "main_shadowmap.frag" });
