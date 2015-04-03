@@ -305,14 +305,14 @@ void RenderToTextureScene::init()
 
 	/* Shadow Buffering */
 	_shadowBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_DEPTH_COMPONENT24, GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT, true);
-	_shadowTexture = _shadowBuffer.getTexture();
+	_shadowTexture = _shadowBuffer.getTexture();	
 	_shadowTexelSize = glm::vec3(1.0f / 1280.0f, 1.0f / 720.0f, 0.0f);
 		
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("plane", "plane/plane.obj");
 	_modelManager->loadModel("screen", "screen/screen.obj");
-	_modelManager->loadModel("screen2", "screen/screen.obj");
 	_modelManager->loadModel("house", "house/house.obj");
+	_modelManager->loadModel("moon", "moon/moon.obj");
 
 	_billboard = new Entity(_modelManager->getModel("screen"));
 	_billboard->addRotation(glm::vec3(1, 0, 0), -90);
@@ -327,14 +327,13 @@ void RenderToTextureScene::init()
 	_mirrorCamera = mirrorCamera;
 	_cameras.push_back(_mirrorCamera);
 
-	Camera* shadowCamera = new Camera(_lightDirection, -70, 70, -70, 70, -100,100);
+	Camera* shadowCamera = new Camera(_lightDirection, -70, 70, -70, 70, -300,300);
 	_shadowCamera = shadowCamera;
 	_cameras.push_back(_shadowCamera);
 
 	_textureManager->loadTexture("default", "default.png");
 
 	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_rttTexture);
-	_modelManager->getModel("screen2")->getMeshes()[0]->setTexture(_textureManager->getTexture("rttTextureNew"));
 	_entities.push_back(new Entity(_modelManager->getModel("cube")));
 	_entities.push_back(new Entity(_modelManager->getModel("house")));
 	//_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(-14, 10, 0)));
@@ -345,10 +344,11 @@ void RenderToTextureScene::init()
 	plane->translate(glm::vec3(5, -0, 0));
 	_entities.push_back(plane);
 	
-	_lamp = new Entity(_modelManager->getModel("cube"));
+	_lamp = new Entity(_modelManager->getModel("moon"));
+	_lamp->setScale(0.5f);
 
 	/* Initialize Lights */
-	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(0, 40, 0), glm::vec3(1, 0, 0));
+	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0));
 	_lights.push_back(_directionalLight);
 	_flashLight = new SpotLight(glm::vec3(1, 0, 0), _activeCamera->getPosition(), _activeCamera->getForward(), 
 		glm::cos(glm::radians(12.5f)),

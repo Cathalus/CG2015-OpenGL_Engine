@@ -1,4 +1,4 @@
-﻿Build started 03.04.2015 15:31:46.
+﻿Build started 03.04.2015 16:23:44.
      1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
      1>Lib:
          OpenGL_Engine.vcxproj -> C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib\glEngine.lib
@@ -6,4 +6,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:00.08

@@ -10,12 +10,12 @@ uniform mat4 model;
 
 out vec4 oColor;
 out vec4 oNormal;
-out vec2 oTexCoord;
+out vec2 TexCoord0;
 
 void main()
 {
 	oColor = normal;
 	gl_Position = MVP*model*vec4(position, 1.0);
-	oTexCoord = vec2(texCoord.x, 1.0-texCoord.y);
+	TexCoord0 = vec2(texCoord.x, 1.0-texCoord.y);
 	oNormal = normal;
 }

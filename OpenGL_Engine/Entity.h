@@ -14,9 +14,9 @@ public:
 		_model = model;
 		*_matrix = glm::scale(*_matrix, glm::vec3(scale));
 		*_matrix = glm::rotate(*_matrix, glm::radians(angle), rotation);
-		*_matrix = glm::translate(*_matrix, translation);
+		*_matrix = glm::translate(*_matrix, translation*(1/scale));
 
-		_translation = translation;
+		_translation = translation * (1/scale);
 		_scale = scale;
 		update();
 	}
@@ -30,12 +30,12 @@ public:
 	}
 	inline void translate(glm::vec3 translation)
 	{
-		_translation += translation;
+		_translation += translation*(1/_scale);
 		*_entityMatrix = glm::translate(*_entityMatrix, translation);
 	}
 	inline void setTranslation(glm::vec3 translation)
 	{
-		_translation = translation;
+		_translation = translation*(1/_scale);
 		update();
 	}
 	inline void addRotation(glm::vec3 rotation, float angle)
