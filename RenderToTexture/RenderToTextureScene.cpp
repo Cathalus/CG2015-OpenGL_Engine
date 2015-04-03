@@ -240,6 +240,8 @@ void RenderToTextureScene::render()
 	_uniformManager->updateUniformData("DepthMVP", biasMatrix*_shadowCamera->getCameraProjection());
 	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
 	draw(true); 
+
+	_cubeMap->Render(_activeCamera->getPosition(), _uniformManager, _shaderManager, "skybox");
 }
 
 void RenderToTextureScene::drawShadowMap(std::string shader)
@@ -313,6 +315,7 @@ void RenderToTextureScene::init()
 	_modelManager->loadModel("screen", "screen/screen.obj");
 	_modelManager->loadModel("house", "house/house.obj");
 	_modelManager->loadModel("moon", "moon/moon.obj");
+	_modelManager->loadModel("skybox", "skybox/skybox.obj");
 
 	_billboard = new Entity(_modelManager->getModel("screen"));
 	_billboard->addRotation(glm::vec3(1, 0, 0), -90);
@@ -347,6 +350,17 @@ void RenderToTextureScene::init()
 	_lamp = new Entity(_modelManager->getModel("moon"));
 	_lamp->setScale(0.5f);
 
+
+	/* Initialize CubeMap */
+	/*_cubeMap = new CubeMap(	std::string("skybox/pX.png"), std::string("skybox/nX.png"),
+							std::string("skybox/pY.png"), std::string("skybox/nY.png"),
+							std::string("skybox/pZ.png"), std::string("skybox/nZ.png"),
+							_modelManager->getModel("skybox"));*/
+	_cubeMap = new CubeMap(std::string("skybox/nnksky01_front.jpg"), std::string("skybox/nnksky01_back.jpg"),
+						   std::string("skybox/nnksky01_top.jpg"), std::string("skybox/nnksky01_top.jpg"),
+						   std::string("skybox/nnksky01_left.jpg"), std::string("skybox/nnksky01_right.jpg"),
+						   _modelManager->getModel("skybox"));
+
 	/* Initialize Lights */
 	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0));
 	_lights.push_back(_directionalLight);
@@ -356,6 +370,8 @@ void RenderToTextureScene::init()
 		1.0f,0.07f,0.017f);
 	_lights.push_back(_flashLight);
 	_lights.push_back(new PointLight(glm::vec3(1, 1, 1), glm::vec3(-1, 2, 0), 1.0, 0.027, 0.0028));
+
+	
 }
 
 void RenderToTextureScene::loadAssets()

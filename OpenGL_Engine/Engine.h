@@ -15,3 +15,4 @@
 #include "Entity.h"
 #include "Framebuffer.h"
 #include "LightSource.h"
+#include "CubeMap.h"

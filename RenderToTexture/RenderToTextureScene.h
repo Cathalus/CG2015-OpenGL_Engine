@@ -45,4 +45,6 @@ private:
 
 	bool _flashLightActive = false;
 	bool _flashLightKeyLock = false;
+
+	CubeMap* _cubeMap;
 };

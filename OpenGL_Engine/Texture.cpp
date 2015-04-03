@@ -67,6 +67,11 @@ Texture::Texture(GLuint width, GLuint height, GLenum textureTarget, GLenum inter
 	_height = height;
 }
 
+Texture::Texture(GLuint* id)
+{
+	_texture = id;
+}
+
 void Texture::Bind(unsigned int unit)
 {
 	assert(unit >= 0 && unit <= 31);
