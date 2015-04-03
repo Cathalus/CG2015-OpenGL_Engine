@@ -167,6 +167,7 @@ void RenderToTextureScene::render()
 {
 	for (LightSource* lightSource : _lights)
 	{
+		int pointCNT = 0;
 		if (lightSource->getType() == LightType::DIRECTIONAL)
 		{
 			_uniformManager->updateUniformData("directionalLight.color", _directionalLight->getColor());
@@ -184,6 +185,22 @@ void RenderToTextureScene::render()
 			_uniformManager->updateUniformData("spotLight.linear", _flashLight->getLinear());
 			_uniformManager->updateUniformData("spotLight.quadratic", _flashLight->getQuadratic());
 			_uniformManager->updateUniformData("spotLight.active", _flashLightActive);
+		}
+		else if (lightSource->getType() == LightType::POINT)
+		{
+			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].color", 
+				lightSource->getColor());
+			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].position", 
+				lightSource->getPosition());
+			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].constant",
+				((PointLight*) lightSource)->getConstant());
+			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].linear",
+				((PointLight*)lightSource)->getLinear());
+			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].quadratic",
+				((PointLight*)lightSource)->getQuadratic());
+			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].active",
+				true);
+			pointCNT++;
 		}
 	}
 
@@ -338,6 +355,7 @@ void RenderToTextureScene::init()
 		glm::cos(glm::radians(13.5f)),
 		1.0f,0.07f,0.017f);
 	_lights.push_back(_flashLight);
+	_lights.push_back(new PointLight(glm::vec3(1, 1, 1), glm::vec3(-1, 2, 0), 1.0, 0.027, 0.0028));
 }
 
 void RenderToTextureScene::loadAssets()

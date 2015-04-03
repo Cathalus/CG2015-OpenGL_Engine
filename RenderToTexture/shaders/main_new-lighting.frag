@@ -179,10 +179,33 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir, Mat
 	return (ambient + diffuse + specular);
 }
 
+vec3 calcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, Material material)
+{
+	float specularStrength = material.shininessStrength;
+
+	vec3 lightDir = normalize(light.position-fragPos);
+	// Diffuse Lighting
+	float lamberFactor = max(dot(normal, lightDir), 0.0);
+	// Specular Lighting
+	vec3 reflectDir = normalize(reflect(-lightDir, normal));
+	float shininess = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	// Attenuation
+	float distance = length(light.position-fragPos);
+	float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+	
+	vec3 diffuse = lamberFactor * light.color * material.diffuse;
+	vec3 ambient = ambientStrength * light.color * material.ambient;
+	vec3 specular = specularStrength * shininess * light.color * material.specular;
+	
+	ambient *= attenuation;
+	diffuse *= attenuation;
+	specular *= attenuation;
+	return (ambient + diffuse + specular);
+}
+
 void main()
 {
 	vec4 shadowCoordinateWdivide = ShadowCoord0 / ShadowCoord0.w;
-	
 	
 	vec4 diffuseColor = texture2D(textureDiffuse, TexCoord0);
 	vec3 normal = calcBumpMap();
@@ -192,5 +215,10 @@ void main()
 	if(spotLight.active) lightSpot = calcSpotLight(spotLight, normal, FragPos0, viewDir, material);
 	vec4 result = vec4(dirLight,1.0);
 	result += vec4(lightSpot,1.0);
+	for(int i = 0; i < NUM_POINT_LIGHTS; i++)
+	{
+		result += max(vec4(0),vec4(calcPointLight(pointLights[i], normal, FragPos0, viewDir, material),1.0));
+		//result += vec4(0.25f);
+	}
 	FragColor = result * diffuseColor;
 }

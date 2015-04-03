@@ -62,11 +62,15 @@ private:
 class PointLight : public LightSource
 {
 public:
-	PointLight(glm::vec3 lightColor, glm::vec3 lightPosition, glm::vec3 lightDirection, float constant, float linear, float quadratic) :
-		LightSource(lightColor, lightPosition, lightDirection),
+	PointLight(glm::vec3 lightColor, glm::vec3 lightPosition, float constant, float linear, float quadratic) :
+		LightSource(lightColor, lightPosition, glm::vec3(0,0,0)),
 		_constant(constant),
 		_linear(linear),
 		_quadratic(quadratic) {};
+	inline LightType getType() { return LightType::POINT; }
+	inline float getConstant() { return _constant; }
+	inline float getLinear() { return _linear; }
+	inline float getQuadratic() { return _quadratic; }
 private:
 	float _constant;
 	float _linear;
