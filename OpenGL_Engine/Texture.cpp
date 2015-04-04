@@ -23,7 +23,7 @@ Texture::Texture(const std::string& fileName, GLenum textureTarget, GLfloat filt
 	glTexParameteri(_textureTarget, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	// GLint level = mipmapping
-	glTexImage2D(_textureTarget, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+	glTexImage2D(_textureTarget, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
 	// texture interpolation (filtering)
 	glTexParameteri(_textureTarget, GL_TEXTURE_MIN_FILTER, filter);	// minification

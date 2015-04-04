@@ -730,7 +730,7 @@ void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene)
 				// Specular Color
 				aiColor3D specular(0, 0, 0);
 				if (material->Get(AI_MATKEY_COLOR_AMBIENT, specular) == AI_SUCCESS)
-					mesh->Material.ambient = glm::max(glm::vec3(specular.r, specular.g, specular.b), glm::vec3(0.1,0.1,0.1));
+					mesh->Material.specular = glm::max(glm::vec3(specular.r, specular.g, specular.b), glm::vec3(0.1,0.1,0.1));
 				// Shininess
 				float shininess = 0;
 				if (material->Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS)

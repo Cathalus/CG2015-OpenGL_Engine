@@ -302,7 +302,7 @@ void RenderToTextureScene::init()
 	_lastY = _display->getHeight() / 2;
 
 	/* Set up Render to Texture */
-	_rttBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB32F, GL_RGB, GL_COLOR_ATTACHMENT0,false);
+	_rttBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGBA, GL_RGBA, GL_COLOR_ATTACHMENT0,false);
 	_rttTexture = _rttBuffer.getTexture();
 
 	/* Shadow Buffering */
@@ -369,9 +369,7 @@ void RenderToTextureScene::init()
 		glm::cos(glm::radians(13.5f)),
 		1.0f,0.07f,0.017f);
 	_lights.push_back(_flashLight);
-	_lights.push_back(new PointLight(glm::vec3(1, 1, 1), glm::vec3(-1, 2, 0), 1.0, 0.027, 0.0028));
-
-	
+	_lights.push_back(new PointLight(glm::vec3(1, 1, 1), glm::vec3(-1, 2, 0), 1.0, 0.027, 0.0028));	
 }
 
 void RenderToTextureScene::loadAssets()

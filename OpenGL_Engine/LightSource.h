@@ -30,9 +30,12 @@ protected:
 class DirectionalLight : public LightSource
 {
 public:
-	DirectionalLight(glm::vec3 lightColor, glm::vec3 lightPosition, glm::vec3 lightDirection) :
-		LightSource(lightColor, lightPosition, lightDirection) {};
+	DirectionalLight(glm::vec3 lightColor, glm::vec3 lightPosition, glm::vec3 lightDirection, float intensity) :
+		LightSource(lightColor, lightPosition, lightDirection), _intensity(intensity) {};
 	inline LightType getType() { return LightType::DIRECTIONAL; }
+	inline float getIntensity() { return _intensity; }
+private:
+	float _intensity = 1;
 };
 
 class SpotLight : public LightSource

@@ -29,7 +29,7 @@ public:
 	inline bool hasNormalTexture() { return _hasNormalTexture; }
 
 	struct Material {
-		glm::vec3 ambient = glm::vec3(1,1,1);
+		glm::vec3 ambient = glm::vec3(1, 1, 1);
 		glm::vec3 diffuse = glm::vec3(1, 1, 1);
 		glm::vec3 specular = glm::vec3(1, 1, 1);
 		float shininess = 32;

@@ -9,7 +9,6 @@ enum CameraType { PERSPECTIVE, ORTHO };
 class Camera
 {
 public:
-
 	Camera(const Camera& other) :
 		_position(other._position), _perspective(other._perspective),
 		_forward(other._forward), _up(other._up){};

@@ -19,7 +19,7 @@ public:
 private:
 	GLfloat _lastX, _lastY;
 	GLfloat _yaw = -90.0f, _pitch = 0;
-	GLfloat _ambientStrength = 0.1f;
+	GLfloat _ambientStrength = 0.5f;
 	GLfloat _acc = 0;
 	glm::vec3 _lightColor = glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255);
 	//glm::vec3 _lightColor = glm::vec3((float)255 / 255, (float)255 / 255, (float)255 / 255);

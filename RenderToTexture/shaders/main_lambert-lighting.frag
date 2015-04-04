@@ -128,6 +128,7 @@ void main()
 	{
 		result = (diffuse + specular * vec3(shadowAmount)); 
 	}
-	vec4 diffuseColor = texture2D(textureDiffuse, TexCoord0);
+	vec4 diffuseColor = texture(textureDiffuse, TexCoord0);
+	
 	FragColor = vec4(result,1.0) * diffuseColor * (0.5+0.5*shadowAmount);
 }
