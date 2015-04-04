@@ -12,5 +12,5 @@ newmtl default
   Kd 1 1 1
   Ks 0.2 0.2 0.2
   Ke 0 0 0
-  map_Kd bricks.jpg 
-  map_Kn bricks_normal.jpg
+  map_Kd 199.png
+  map_Kn 199_norm.png

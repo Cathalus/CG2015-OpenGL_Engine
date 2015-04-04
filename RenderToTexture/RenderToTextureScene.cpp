@@ -337,7 +337,7 @@ void RenderToTextureScene::init()
 	_textureManager->loadTexture("default", "default.png");
 
 	_modelManager->getModel("screen")->getMeshes()[0]->setTexture(_rttTexture);
-	_entities.push_back(new Entity(_modelManager->getModel("cube")));
+	_entities.push_back(new Entity(_modelManager->getModel("cube"),glm::vec3(-20,10,0), glm::vec3(1), 0, 2));
 	_entities.push_back(new Entity(_modelManager->getModel("house")));
 	//_entities.push_back(new Entity(_modelManager->getModel("cam"), glm::vec3(-14, 10, 0)));
 	_player = new Entity(_modelManager->getModel("lakitu"), glm::vec3(0, 3, 0), glm::vec3(1, 1, 1), 0, 1.0f);

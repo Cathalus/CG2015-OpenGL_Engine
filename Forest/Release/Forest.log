@@ -1,5 +1,5 @@
-﻿Build started 02.04.2015 21:53:08.
-     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Forest\Forest.vcxproj" on node 4 (Build target(s)).
+﻿Build started 04.04.2015 10:19:18.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Forest\Forest.vcxproj" on node 3 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameplayScene.cpp forest.cpp
          GameplayScene.cpp

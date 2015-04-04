@@ -1,28 +1,60 @@
-﻿Build started 02.04.2015 21:53:08.
-     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
+﻿Build started 04.04.2015 10:25:10.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Rebuild target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp Framebuffer.cpp GLTools.cpp obj_loader.cpp shaderattributes.cpp shadermanager.cpp shaderuniforms.cpp Texture.cpp tiny_obj_loader.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CubeMap.cpp Display.cpp Framebuffer.cpp GLTools.cpp obj_loader.cpp shaderattributes.cpp shadermanager.cpp shaderuniforms.cpp Texture.cpp tiny_obj_loader.cpp
+         CubeMap.cpp
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(69): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
          Display.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Display.h(4): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
          Framebuffer.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Framebuffer.h(2): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
          GLTools.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\GLTools.h(44): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+     1>GLTools.cpp(13): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>GLTools.cpp(773): warning C4018: '<' : signed/unsigned mismatch
+     1>GLTools.cpp(795): warning C4018: '<' : signed/unsigned mismatch
+     1>GLTools.cpp(705): warning C4101: 'iY' : unreferenced local variable
+     1>GLTools.cpp(704): warning C4101: 'nX' : unreferenced local variable
+     1>GLTools.cpp(705): warning C4101: 'iZ' : unreferenced local variable
+     1>GLTools.cpp(703): warning C4101: 'vZ' : unreferenced local variable
+     1>GLTools.cpp(705): warning C4101: 'iX' : unreferenced local variable
+     1>GLTools.cpp(704): warning C4101: 'nZ' : unreferenced local variable
+     1>GLTools.cpp(704): warning C4101: 'nY' : unreferenced local variable
+     1>GLTools.cpp(703): warning C4101: 'vY' : unreferenced local variable
+     1>GLTools.cpp(703): warning C4101: 'vX' : unreferenced local variable
          obj_loader.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\obj_loader.h(2): fatal error C1083: Cannot open include file: 'GL\glew.h': No such file or directory
+     1>obj_loader.cpp(378): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
          shaderattributes.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\shaderattributes.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+     1>shaderattributes.cpp(56): warning C4101: 'tempEBOIndex' : unreferenced local variable
+     1>shaderattributes.cpp(79): warning C4101: 'tempEBOIndex' : unreferenced local variable
          shadermanager.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\shaderuniforms.h(5): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>shadermanager.cpp(17): warning C4244: 'argument' : conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+     1>shadermanager.cpp(175): warning C4018: '<' : signed/unsigned mismatch
          shaderuniforms.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\shaderuniforms.h(5): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
          Texture.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\texture.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+     1>Texture.cpp(29): warning C4244: 'argument' : conversion from 'GLfloat' to 'GLint', possible loss of data
+     1>Texture.cpp(30): warning C4244: 'argument' : conversion from 'GLfloat' to 'GLint', possible loss of data
          tiny_obj_loader.cpp
-     1>tiny_obj_loader.cpp(462): error C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(304) : see declaration of 'sscanf'
-     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" (Build target(s)) -- FAILED.
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt stb_image.c
+         stb_image.c
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib\glEngine-Release.lib" /NOLOGO /LTCG Release\CubeMap.obj
+         Release\Display.obj
+         Release\Framebuffer.obj
+         Release\GLTools.obj
+         Release\obj_loader.obj
+         Release\shaderattributes.obj
+         Release\shadermanager.obj
+         Release\shaderuniforms.obj
+         Release\stb_image.obj
+         Release\Texture.obj
+         Release\tiny_obj_loader.obj
+         OpenGL_Engine.vcxproj -> C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib\glEngine-Release.lib
+     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" (Rebuild target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.90
+Time Elapsed 00:00:06.06
