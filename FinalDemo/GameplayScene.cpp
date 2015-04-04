@@ -234,7 +234,7 @@ void GameplayScene::render()
 	draw(true); 
 
 	// Render Cubemap
-	_cubeMap->Render(_activeCamera->getPosition(), _uniformManager, _shaderManager, "skybox");
+	_cubeMap->Render(_activeCamera->getPosition()+glm::vec3(0,5,0), _uniformManager, _shaderManager, "skybox");
 }
 
 void GameplayScene::drawShadowMap(std::string shader)
@@ -297,9 +297,9 @@ void GameplayScene::init()
 	_shadowCamera = shadowCamera;
 	_cameras.push_back(_shadowCamera);
 
-	_cubeMap = new CubeMap(std::string("skybox/nnksky01_front.jpg"), std::string("skybox/nnksky01_back.jpg"),
-						   std::string("skybox/nnksky01_top.jpg"), std::string("skybox/nnksky01_top.jpg"),
-						   std::string("skybox/nnksky01_left.jpg"), std::string("skybox/nnksky01_right.jpg"),
+	_cubeMap = new CubeMap(std::string("skybox/mn_front.png"), std::string("skybox/mn_back.png"),
+						   std::string("skybox/mn_up.png"), std::string("skybox/mn_down.png"),
+						   std::string("skybox/mn_right.png"), std::string("skybox/mn_left.png"),
 						   _modelManager->getModel("skybox"));
 }
 
