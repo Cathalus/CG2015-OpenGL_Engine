@@ -96,6 +96,35 @@ void GameplayScene::update(float delta)
 		_directionalLight->translate(glm::vec3(0, -delta*_speed, 0));
 	}
 
+	if (temp != NULL)
+	{
+		if (currentKeyStates[SDL_SCANCODE_T])
+		{
+			temp->translate(glm::vec3(-delta, 0, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_G])
+		{
+			temp->translate(glm::vec3(delta, 0, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_F])
+		{
+			temp->translate(glm::vec3(0, 0, delta));
+		}
+		if (currentKeyStates[SDL_SCANCODE_H])
+		{
+			temp->translate(glm::vec3(0, 0, -delta));
+		}
+		if (currentKeyStates[SDL_SCANCODE_U])
+		{
+			temp->translate(glm::vec3(0, delta, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_J])
+		{
+			temp->translate(glm::vec3(0, -delta, 0));
+		}
+		std::cout << temp->getPosition().x << " " << temp->getPosition().y << " " << temp->getPosition().z << std::endl;
+	}
+
 	if (currentKeyStates[SDL_SCANCODE_1])
 	{
 		_activeCamera = _cameras[0];
@@ -309,6 +338,7 @@ void GameplayScene::loadAssets()
 	_modelManager->loadModel("skybox", "skybox/skybox.obj");
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("terrain", "level/level.obj");
+	_modelManager->loadModel("oillamp", "lamp/oilLamp.obj");
 
 	/* Initialize Lights */
 	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0),1);
@@ -318,8 +348,8 @@ void GameplayScene::loadAssets()
 		glm::cos(glm::radians(17.5f)),
 		1.0f, 0.09f, 0.032f);
 	_lights.push_back(_flashLight);
-	_lights.push_back(new PointLight(glm::vec3((float)0 / 255, (float)255 / 255, (float)0 / 255),
-		glm::vec3(44, 17, -34), 1, 0.14f, 0.07f));
+	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)255 / 255, (float)255 / 255),
+		glm::vec3(2.893, 1, -4), 1, 0.14f, 0.07f));
 	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)0 / 255, (float)0 / 255),
 		glm::vec3(93, 42, 7), 1, 0.022f, 0.0019f));
 	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)191 / 255, (float)0 / 255),
@@ -328,8 +358,6 @@ void GameplayScene::loadAssets()
 
 void GameplayScene::initEntities()
 {
-	Entity* temp;
-	
 	// Terrain
 	temp = new Entity(_modelManager->getModel("terrain"));
 	temp->addRotation(glm::vec3(0, 1, 0), 180);
@@ -338,6 +366,11 @@ void GameplayScene::initEntities()
 	
 	// Lamp
 	_lamp = new Entity(_modelManager->getModel("cube"));
+
+	// Oil Lamp
+	temp = new Entity(_modelManager->getModel("oillamp"));
+	temp->translate(glm::vec3(2.893, 0.728, -4));
+	_entities.push_back(temp);
 }
 
 void GameplayScene::unloadAssets()
