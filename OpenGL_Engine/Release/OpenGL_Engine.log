@@ -1,14 +1,9 @@
-﻿Build started 04.04.2015 19:43:18.
+﻿Build started 04.04.2015 22:35:47.
      1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CubeMap.cpp
-         CubeMap.cpp
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(69): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Display.cpp
+         Display.cpp
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib\glEngine-Release.lib" /NOLOGO /LTCG Release\CubeMap.obj
          Release\Display.obj
@@ -26,4 +21,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.54
+Time Elapsed 00:00:01.30

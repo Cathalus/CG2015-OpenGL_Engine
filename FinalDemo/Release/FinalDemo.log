@@ -1,13 +1,13 @@
-﻿Build started 04.04.2015 22:15:02.
-     1>Project "C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" on node 2 (Build target(s)).
+﻿Build started 04.04.2015 22:43:18.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" on node 3 (Build target(s)).
      1>ClCompile:
-         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\\include" /I"C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\\" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameplayScene.cpp init.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameplayScene.cpp
          GameplayScene.cpp
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(69): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(69): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
      1>GameplayScene.cpp(127): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
      1>GameplayScene.cpp(128): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
      1>GameplayScene.cpp(130): warning C4244: 'argument' : conversion from 'GLfloat' to 'int', possible loss of data
@@ -18,23 +18,13 @@
      1>GameplayScene.cpp(289): warning C4305: 'argument' : truncation from 'double' to 'float'
      1>GameplayScene.cpp(289): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
      1>GameplayScene.cpp(296): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
-         init.cpp
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Model.h(12): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(69): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\Entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>init.cpp(17): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>init.cpp(17): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>init.cpp(17): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
        Link:
-         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\FinalDemo.exe" /NOLOGO /LIBPATH:"C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib "glEngine-Release.lib" assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\FinalDemo.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\FinalDemo.lib" /MACHINE:X86 /SAFESEH Release\GameplayScene.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.exe" /NOLOGO /LIBPATH:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib "glEngine-Release.lib" assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.lib" /MACHINE:X86 /SAFESEH Release\GameplayScene.obj
          Release\init.obj
      1>MSVCRT.lib(cinitexe.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
          Generating code
-     1>c:\users\xarana\desktop\mygameengine\cg2015-opengl_engine\opengl_engine\camera.h(51): warning C4715: 'Camera::getCameraProjection' : not all control paths return a value
+     1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\camera.h(51): warning C4715: 'Camera::getCameraProjection' : not all control paths return a value
          Finished generating code
-     1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewCheckFramebufferStatus imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewRenderbufferStorage imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewBindFramebuffer imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewGenFramebuffers imported
@@ -44,6 +34,7 @@
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewFramebufferTexture imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewFramebufferRenderbuffer imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewBindRenderbuffer imported
+     1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewCheckFramebufferStatus imported
      1>glEngine-Release.lib(shadermanager.obj) : warning LNK4049: locally defined symbol ___glewAttachShader imported
      1>glEngine-Release.lib(shadermanager.obj) : warning LNK4049: locally defined symbol ___glewCreateProgram imported
      1>glEngine-Release.lib(shadermanager.obj) : warning LNK4049: locally defined symbol ___glewGetProgramInfoLog imported
@@ -76,19 +67,10 @@
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewBindBuffer imported
-     1>glEngine-Release.lib(CubeMap.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(CubeMap.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(Framebuffer.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(GLTools.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(GLTools.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(shadermanager.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(shadermanager.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(Display.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(Display.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(shaderuniforms.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(shaderuniforms.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(Texture.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(Texture.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(stb_image.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(stb_image.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glEngine-Release.lib(shaderattributes.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
-         FinalDemo.vcxproj -> C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\FinalDemo.exe
-     1>Done Building Project "C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" (Build target(s)).
+     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\vc120.pdb'; linking object as if no debug info
+         FinalDemo.vcxproj -> C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.exe
+     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:09.89
+Time Elapsed 00:00:03.45

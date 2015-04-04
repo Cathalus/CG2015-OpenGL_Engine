@@ -362,7 +362,7 @@ void RenderToTextureScene::init()
 						   _modelManager->getModel("skybox"));
 
 	/* Initialize Lights */
-	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0));
+	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0),1);
 	_lights.push_back(_directionalLight);
 	_flashLight = new SpotLight(glm::vec3(1, 0, 0), _activeCamera->getPosition(), _activeCamera->getForward(), 
 		glm::cos(glm::radians(12.5f)),

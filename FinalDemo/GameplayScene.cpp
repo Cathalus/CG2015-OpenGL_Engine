@@ -308,7 +308,7 @@ void GameplayScene::loadAssets()
 	/* Models */
 	_modelManager->loadModel("skybox", "skybox/skybox.obj");
 	_modelManager->loadModel("cube", "cube/cube.obj");
-	_modelManager->loadModel("terrain", "terrain/terrain.obj");
+	_modelManager->loadModel("terrain", "level/level.obj");
 
 	/* Initialize Lights */
 	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0),1);
@@ -332,6 +332,8 @@ void GameplayScene::initEntities()
 	
 	// Terrain
 	temp = new Entity(_modelManager->getModel("terrain"));
+	temp->addRotation(glm::vec3(0, 1, 0), 180);
+	temp->rotate();
 	_entities.push_back(temp);
 	
 	// Lamp
