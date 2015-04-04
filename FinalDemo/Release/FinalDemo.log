@@ -1,9 +1,9 @@
-﻿Build started 04.04.2015 23:01:37.
-     1>Project "C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" on node 2 (Build target(s)).
+﻿Build started 04.04.2015 23:36:10.
+     1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" on node 2 (Build target(s)).
      1>Link:
-         FinalDemo.vcxproj -> C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\Release\FinalDemo.exe
-     1>Done Building Project "C:\Users\Xarana\Desktop\MyGameEngine\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" (Build target(s)).
+         FinalDemo.vcxproj -> C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.exe
+     1>Done Building Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.25
+Time Elapsed 00:00:00.08
