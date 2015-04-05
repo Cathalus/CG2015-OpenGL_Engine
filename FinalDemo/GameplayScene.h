@@ -14,7 +14,7 @@ public:
 	~GameplayScene() { unloadAssets(); }
 private:
 	void updateLightSources();
-	void draw(bool drawLightSource);
+	void draw(bool drawLightSource, bool drawPlayer);
 	void drawShadowMap(std::string shader);
 	void loadAssets();
 	void unloadAssets();
@@ -41,6 +41,7 @@ private:
 	Entity* temp;
 	Entity* _camera;
 	Entity* _bounceCube;
+	Entity* _player;
 
 	/* Cameras */
 	Camera* _mirrorCamera;

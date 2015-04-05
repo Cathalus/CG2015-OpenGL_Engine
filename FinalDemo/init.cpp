@@ -25,6 +25,7 @@ int main()
 	shaderManager->createShaderProgram("shadowMap", { "main_shadowmap.vert", "main_shadowmap.frag" });
 	shaderManager->createShaderProgram("skybox",	{ "skybox.frag", "skybox.vert" });
 	shaderManager->createShaderProgram("lamp",		{ "lamp.vert", "lamp.frag" });
+	shaderManager->createShaderProgram("mirror",	{ "mirror.vert", "mirror.frag" });
 
 	/* Scene Setup */
 	GameplayScene scene = GameplayScene(display, shaderManager, textureManager, modelManager, uniforms);

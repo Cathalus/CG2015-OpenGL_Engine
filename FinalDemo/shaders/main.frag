@@ -46,7 +46,7 @@ uniform sampler2D textureDiffuse;				// DiffuseMap
 uniform sampler2D textureNormal;				// NormalMap
 uniform sampler2D textureDepth;					// ShadowMap
 
-#define NUM_POINT_LIGHTS 3
+#define NUM_POINT_LIGHTS 7
 
 uniform DirectionalLight directionalLight;
 uniform SpotLight spotLight;

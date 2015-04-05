@@ -175,8 +175,11 @@ void GameplayScene::update(float delta)
 	// _player camera translation
 	glm::vec3 mainCam = _cameras[0]->getPosition();
 	glm::vec3 mainCamForward = _cameras[0]->getForward();
-	glm::vec3 mirrorCam = _mirrorCamera->getPosition();
-	glm::vec3 mirrorFwd = glm::normalize(mirrorCam - (mainCam+mainCamForward));
+
+	glm::vec3 mirrorCam = _mirror->getPosition();
+	float yValue = glm::clamp(_cameras[0]->getPosition().y, 0.0f, 21.0f);
+	mirrorCam.y = yValue;
+	glm::vec3 mirrorFwd = glm::normalize(mirrorCam-mainCam);
 	_mirrorCamera->setForward(glm::reflect(mirrorFwd, glm::vec3(1,0,0)));
 
 	// Update light Direction
@@ -189,6 +192,15 @@ void GameplayScene::update(float delta)
 	// Bouncing cube animation
 	float val = glm::sin(_acc) * 4;
 	_bounceCube->setTranslation(glm::vec3(_bounceCube->getPosition().x, 7+val, _bounceCube->getPosition().z));
+
+	// Translate and rotate player
+	_player->setTranslation(_cameras[0]->getPosition());
+	_player->clearRotation();
+	glm::vec3 camFwd = glm::vec3(_cameras[0]->getForward().x, 0, _cameras[0]->getForward().z);
+	glm::vec3 cubeFwd = glm::vec3(0, 0, -1);
+	float angle = glm::dot(cubeFwd, camFwd);
+	_player->addRotation(glm::vec3(0, 1, 0), glm::degrees(angle));
+	_player->rotate();
 }
 
 void GameplayScene::updateLightSources()
@@ -254,7 +266,7 @@ void GameplayScene::render()
 	_rttBuffer.bindForWriting();
 	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
 	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
-	draw(true);
+	draw(true, true);
 
 	_activeCamera = temp;
 
@@ -271,10 +283,10 @@ void GameplayScene::render()
 	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
 	_uniformManager->updateUniformData("DepthMVP", biasMatrix*_shadowCamera->getCameraProjection());
 	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
-	draw(true); 
+	draw(true, false); 
 
 	// Render Cubemap
-	_cubeMap->Render(_activeCamera->getPosition()+glm::vec3(0,5,0), _uniformManager, _shaderManager, "skybox");
+	_cubeMap->Render(_activeCamera->getPosition() + glm::vec3(0, 5, 0), _uniformManager, _shaderManager, "skybox");
 }
 
 void GameplayScene::drawShadowMap(std::string shader)
@@ -287,7 +299,7 @@ void GameplayScene::drawShadowMap(std::string shader)
 	}
 }
 
-void GameplayScene::draw(bool drawLightSource)
+void GameplayScene::draw(bool drawLightSource, bool drawPlayer)
 {
 	_shadowBuffer.bindForReading(11);
 	_uniformManager->updateUniformData("textureDepth", 11);
@@ -298,13 +310,25 @@ void GameplayScene::draw(bool drawLightSource)
 
 	for (Entity* e : _entities)
 	{
-		_uniformManager->updateUniformData("model", *e->getCombinedMatrix());
-		_shaderManager->drawWithShaderProgram("main", e->getModel(), *_uniformManager);
+		if (e == _mirror)
+		{
+			_uniformManager->updateUniformData("model", *e->getCombinedMatrix());
+			_shaderManager->drawWithShaderProgram("mirror", e->getModel(), *_uniformManager);
+		}
+		else{
+			_uniformManager->updateUniformData("model", *e->getCombinedMatrix());
+			_shaderManager->drawWithShaderProgram("main", e->getModel(), *_uniformManager);
+		}
 	}
 
 	// Draw Lamp
 	_uniformManager->updateUniformData("model", *_lamp->getCombinedMatrix());
 	_shaderManager->drawWithShaderProgram("lamp", _lamp->getModel(), *_uniformManager);
+
+	// Draw Player
+	if (drawPlayer)
+		_uniformManager->updateUniformData("model", *_player->getCombinedMatrix());
+	_shaderManager->drawWithShaderProgram("main", _player->getModel(), *_uniformManager);
 }
 
 void GameplayScene::init()
@@ -315,7 +339,7 @@ void GameplayScene::init()
 	_lastY = _display->getHeight() / 2;
 
 	/* Set up Render to Texture */
-	_rttBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGBA, GL_RGBA, GL_COLOR_ATTACHMENT0,false);
+	_rttBuffer.init(_display->getWidth(), _display->getHeight(), GL_TEXTURE_2D, GL_RGB, GL_RGB, GL_COLOR_ATTACHMENT0, false);
 	_rttTexture = _rttBuffer.getTexture();
 
 	/* Shadow Buffering */
@@ -356,29 +380,42 @@ void GameplayScene::initEntities()
 	// Lamp
 	_lamp = new Entity(_modelManager->getModel("cube"));
 
-	// Tree
-	temp = new Entity(_modelManager->getModel("tree"));
-	temp->setTranslation(glm::vec3(0, 0, -10));
-	_entities.push_back(temp);
-
 	// Mirror
 	temp = new Entity(_modelManager->getModel("plane"));
-	temp->setScale(0.25f);
+	temp->setScale(1);
 	temp->addRotation(glm::vec3(0, 0, 1), 90);
-	temp->setTranslation(glm::vec3(7, 4, 0));
+	temp->addRotation(glm::vec3(0, 1, 0), 90);
+	temp->setTranslation(glm::vec3(20, 11, -10));
 	temp->rotate();
 	_mirrorCamera->setPosition(temp->getPosition());
 	temp->getModel()->getMeshes()[0]->setTexture(_textureManager->getTexture("mirrorTexture"));
 	_mirror = temp;
 	_entities.push_back(_mirror);
 
-	// StreetLamp
+	// StreetLamp 1
 	temp = new Entity(_modelManager->getModel("lamp"));
 	temp->setTranslation(glm::vec3(-3.72f, 1.342f, -13.2791f));
 	temp->addRotation(glm::vec3(0, 1, 0), 30);
 	temp->rotate();
 	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), temp->getPosition(), 1, 0.09f, 0.032f));
 	_entities.push_back(temp);
+
+	// StreetLamp 2
+	temp = new Entity(_modelManager->getModel("lamp"));
+	temp->setTranslation(glm::vec3(18.755f, 1.66527f, -20.0f));
+	temp->addRotation(glm::vec3(0, 1, 0), 30);
+	temp->rotate();
+	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), temp->getPosition(), 1, 0.027f, 0.0028f));
+	_entities.push_back(temp);
+
+	// StreetLamp 3
+	temp = new Entity(_modelManager->getModel("lamp"));
+	temp->setTranslation(glm::vec3(18.755f, 2.0f, 0.0f));
+	temp->addRotation(glm::vec3(0, 1, 0), 30);
+	temp->rotate();
+	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), temp->getPosition(), 1, 0.027f, 0.0028f));
+	_entities.push_back(temp);
+
 
 	temp = new Entity(_modelManager->getModel("cam"));
 	_camera = temp;
@@ -401,6 +438,10 @@ void GameplayScene::initEntities()
 	_bounceCube = temp;
 	_bounceCube->setTranslation(glm::vec3(-54, 7, -49));
 	_entities.push_back(_bounceCube);
+
+	// Player Model
+	_player = new Entity(_modelManager->getModel("cube_awesome"));
+	_player->setTranslation(_cameras[0]->getPosition());
 }
 
 void GameplayScene::loadAssets()
@@ -409,8 +450,8 @@ void GameplayScene::loadAssets()
 	_modelManager->loadModel("skybox", "skybox/skybox.obj");
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("cube_bricks", "cube/cube_brick.obj");
+	_modelManager->loadModel("cube_awesome", "cube/cube_awesome.obj");
 	_modelManager->loadModel("terrain", "level/level.obj");
-	_modelManager->loadModel("tree", "level/tree/tree.obj");
 	_modelManager->loadModel("plane", "plane/plane.obj");
 	_modelManager->loadModel("lamp", "lamp/untitled.obj");
 	_modelManager->loadModel("cam", "kamera/KameraNew.obj");
