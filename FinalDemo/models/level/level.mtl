@@ -1,5 +1,5 @@
 # Blender MTL File: 'levelTest.blend'
-# Material Count: 11
+# Material Count: 12
 
 newmtl Leaves
 Ns 96.078431
@@ -9,7 +9,7 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd birke.png
+map_Kd C:\Users\Xarana\Desktop\Graphics-Project\birke.png
 
 newmtl Material
 Ns 96.078431
@@ -28,7 +28,7 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd landTexture.png
+map_Kd C:\Users\Xarana\Desktop\Graphics-Project\Graphics-Project\landTexture..png
 
 newmtl Material.002
 Ns 96.078431
@@ -47,7 +47,7 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd trunk.jpg
+map_Kd C:\Users\Xarana\Desktop\Graphics-Project\trunk.jpg
 
 newmtl Window
 Ns 96.078431
@@ -86,6 +86,15 @@ d 1.000000
 illum 2
 
 newmtl roof
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl room
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
