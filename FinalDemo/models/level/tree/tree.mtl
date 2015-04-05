@@ -9,7 +9,7 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd trunk.jpg
+map_Kd C:\Users\Xarana\Desktop\Graphics-Project\trunk.jpg
 
 newmtl Material.001
 Ns 96.078431
@@ -20,6 +20,7 @@ Ni 1.000000
 d 0.000000
 illum 1
 map_Kd birke.png
+map_d C:\\Users\\Xarana\\Desktop\\Graphics-Project\\birke.png
 
 newmtl None
 Ns 0
