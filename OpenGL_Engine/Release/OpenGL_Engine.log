@@ -1,4 +1,4 @@
-﻿Build started 05.04.2015 20:24:35.
+﻿Build started 05.04.2015 22:36:50.
      1>Project "C:\Users\cathalus\Documents\CG2015-OpenGL_Engine\OpenGL_Engine\OpenGL_Engine.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
      1>ClCompile:
@@ -58,4 +58,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.46
+Time Elapsed 00:00:11.14

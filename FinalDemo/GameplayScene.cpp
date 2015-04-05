@@ -416,17 +416,6 @@ void GameplayScene::initEntities()
 	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), temp->getPosition(), 1, 0.027f, 0.0028f));
 	_entities.push_back(temp);
 
-
-	temp = new Entity(_modelManager->getModel("cam"));
-	_camera = temp;
-	_camera->setScale(0.1f);
-	_camera->setTranslation(glm::vec3(77.2401f*0.1f, 202.332f*0.1f, -62.97f*0.1f));
-	_camera->getModel()->getMeshes()[0]->setTexture(_textureManager->getTexture("landTexture"));
-	_camera->addRotation(glm::vec3(0, 1, 0), 90);
-	_camera->rotate();
-	_entities.push_back(_camera);
-
-
 	// In House Light
 	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), glm::vec3(0.54903f,4.12578f, 2.50576f), 1, 0.09f, 0.032f));
 

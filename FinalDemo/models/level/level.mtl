@@ -9,7 +9,7 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\Xarana\Desktop\Graphics-Project\birke.png
+map_Kd birke.png
 
 newmtl Material
 Ns 96.078431
@@ -19,6 +19,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd arbor.jpg
+map_Kn arbor_normal.jpg
 
 newmtl Material.001
 Ns 96.078431
@@ -28,7 +30,7 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\Xarana\Desktop\Graphics-Project\Graphics-Project\landTexture..png
+map_Kd landTexture.png
 
 newmtl Material.002
 Ns 96.078431
@@ -38,6 +40,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd dirt.jpg
+map_Kn dirt_normal.jpg
 
 newmtl Trunk
 Ns 96.078431
@@ -47,7 +51,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\Xarana\Desktop\Graphics-Project\trunk.jpg
+map_Kd trunk.jpg
+map_Kn trunk_normal.jpg
 
 newmtl Window
 Ns 96.078431
@@ -57,6 +62,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd window.jpg
+map_Kn window_normal.jpg
 
 newmtl innerWall
 Ns 96.078431
@@ -66,6 +73,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd innerwall.jpg
+map_Kn innerwall_normal.jpg
 
 newmtl innerWallTop
 Ns 96.078431
@@ -75,6 +84,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd innerwall.jpg
+map_Kn innerwall_normal.jpg
 
 newmtl outerwall
 Ns 96.078431
@@ -84,6 +95,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd outerwall.jpg
+map_Kn outerwall_normal.jpg
 
 newmtl roof
 Ns 96.078431
@@ -93,6 +106,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd roof.jpg
+map_Kn roof_normal.jpg
 
 newmtl room
 Ns 96.078431
@@ -102,6 +117,8 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd room.jpg
+map_Kn room_normal.jpg
 
 newmtl window2
 Ns 96.078431
@@ -111,3 +128,5 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd window.jpg
+map_Kn window_normal.jpg
