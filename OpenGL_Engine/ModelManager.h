@@ -30,7 +30,7 @@ public:
 				//aiProcess_SortByPType | 
 				aiProcess_CalcTangentSpace);
 
-			Model* temp = new Model(scene);
+			Model* temp = new Model(scene, _textureManager);
 			temp->setMatrix(glm::scale(*temp->getMatrix(), glm::vec3(scale)));
 			if (translation != glm::vec3(0))
 				temp->setMatrix(glm::translate(*temp->getMatrix(), translation));
@@ -56,6 +56,8 @@ public:
 			return _models[name];
 		}
 	}
+	inline void setTextureManager(TextureManager* textureManager) { _textureManager = textureManager; }
 private:
 	std::map<std::string, Model*> _models;
+	TextureManager* _textureManager;
 };

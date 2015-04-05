@@ -10,7 +10,8 @@ c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\framebuff
 c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\display.obj
 c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\cubemap.obj
 c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\stb_image.obj
-c:\users\cathalus\documents\cg2015-opengl_engine\lib\opengl_engine-release.lib
+c:\users\cathalus\documents\cg2015-opengl_engine\lib\glengine-release.lib
+c:\users\cathalus\documents\cg2015-opengl_engine\\lib\glengine-release.lib
 c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\opengl_engine.tlog\cl.command.1.tlog
 c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\opengl_engine.tlog\cl.read.1.tlog
 c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\release\opengl_engine.tlog\cl.write.1.tlog

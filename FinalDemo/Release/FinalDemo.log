@@ -1,4 +1,4 @@
-﻿Build started 05.04.2015 11:30:36.
+﻿Build started 05.04.2015 15:24:04.
      1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\FinalDemo\FinalDemo.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\include" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine" /I"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameplayScene.cpp
@@ -8,16 +8,16 @@
      1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(70): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
      1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(27): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
      1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\Entity.h(78): warning C4316: 'glm::tmat4x4<float,0>' : object allocated on the heap may not be aligned 16
-     1>GameplayScene.cpp(127): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>GameplayScene.cpp(128): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>GameplayScene.cpp(130): warning C4244: 'argument' : conversion from 'GLfloat' to 'int', possible loss of data
-     1>GameplayScene.cpp(133): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>GameplayScene.cpp(134): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>GameplayScene.cpp(275): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>GameplayScene.cpp(276): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>GameplayScene.cpp(288): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>GameplayScene.cpp(288): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
-     1>GameplayScene.cpp(295): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
+     1>GameplayScene.cpp(159): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>GameplayScene.cpp(160): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>GameplayScene.cpp(162): warning C4244: 'argument' : conversion from 'GLfloat' to 'int', possible loss of data
+     1>GameplayScene.cpp(165): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>GameplayScene.cpp(166): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>GameplayScene.cpp(304): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>GameplayScene.cpp(305): warning C4244: '=' : conversion from 'int' to 'GLfloat', possible loss of data
+     1>GameplayScene.cpp(317): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>GameplayScene.cpp(317): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
+     1>GameplayScene.cpp(324): warning C4316: 'Camera' : object allocated on the heap may not be aligned 16
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.exe" /NOLOGO /LIBPATH:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib "glEngine-Release.lib" assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\FinalDemo.lib" /MACHINE:X86 /SAFESEH Release\GameplayScene.obj
          Release\init.obj
@@ -25,6 +25,7 @@
          Generating code
      1>c:\users\cathalus\documents\cg2015-opengl_engine\opengl_engine\camera.h(51): warning C4715: 'Camera::getCameraProjection' : not all control paths return a value
          Finished generating code
+     1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewDrawBuffers imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewDeleteFramebuffers imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewFramebufferTexture imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewFramebufferRenderbuffer imported
@@ -34,7 +35,6 @@
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewBindFramebuffer imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewGenFramebuffers imported
      1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewGenRenderbuffers imported
-     1>glEngine-Release.lib(Framebuffer.obj) : warning LNK4049: locally defined symbol ___glewDrawBuffers imported
      1>glEngine-Release.lib(Texture.obj) : warning LNK4049: locally defined symbol ___glewGenerateMipmap imported
      1>glEngine-Release.lib(Texture.obj) : warning LNK4049: locally defined symbol ___glewActiveTexture imported
      1>glEngine-Release.lib(shadermanager.obj) : warning LNK4049: locally defined symbol ___glewAttachShader imported
@@ -74,4 +74,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.13
+Time Elapsed 00:00:03.08

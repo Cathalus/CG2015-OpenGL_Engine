@@ -96,6 +96,38 @@ void GameplayScene::update(float delta)
 		_directionalLight->translate(glm::vec3(0, -delta*_speed, 0));
 	}
 
+	if (temp != NULL)
+	{
+		if (currentKeyStates[SDL_SCANCODE_T])
+		{
+			temp->translate(glm::vec3(-delta, 0, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_G])
+		{
+			temp->translate(glm::vec3(delta, 0, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_F])
+		{
+			temp->translate(glm::vec3(0, 0, delta));
+		}
+		if (currentKeyStates[SDL_SCANCODE_H])
+		{
+			temp->translate(glm::vec3(0, 0, -delta));
+		}
+		if (currentKeyStates[SDL_SCANCODE_U])
+		{
+			temp->translate(glm::vec3(0, delta, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_J])
+		{
+			temp->translate(glm::vec3(0, -delta, 0));
+		}
+		if (currentKeyStates[SDL_SCANCODE_Z])
+		{
+			std::cout << temp->getPosition().x << " " << temp->getPosition().y << " " <<  temp->getPosition().z << std::endl;
+		}
+	}
+
 	if (currentKeyStates[SDL_SCANCODE_1])
 	{
 		_activeCamera = _cameras[0];
@@ -175,7 +207,6 @@ void GameplayScene::updateLightSources()
 		}
 		else if (lightSource->getType() == LightType::POINT)
 		{
-			std::cout << pointCNT << std::endl;
 			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].color",
 				lightSource->getColor());
 			_uniformManager->updateUniformData("pointLights[" + std::to_string(pointCNT) + "].position",
@@ -209,10 +240,10 @@ void GameplayScene::render()
 	glCullFace(GL_BACK);
 
 	// Render to Texture (Mirror)
-	_activeCamera = _shadowCamera;
+	_activeCamera = _mirrorCamera;
 	_rttBuffer.bindForWriting();
 	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
-	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
+	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
 	draw(true);
 
 	_activeCamera = temp;
@@ -268,8 +299,6 @@ void GameplayScene::draw(bool drawLightSource)
 
 void GameplayScene::init()
 {
-	loadAssets();
-	
 	SDL_ShowCursor(0);
 	/* Mouse Delta */
 	_lastX = _display->getWidth() / 2;
@@ -296,46 +325,18 @@ void GameplayScene::init()
 	_shadowCamera = shadowCamera;
 	_cameras.push_back(_shadowCamera);
 
-	_cubeMap = new CubeMap(std::string("skybox/mn_front.png"), std::string("skybox/mn_back.png"),
-						   std::string("skybox/mn_up.png"), std::string("skybox/mn_down.png"),
-						   std::string("skybox/mn_right.png"), std::string("skybox/mn_left.png"),
-						   _modelManager->getModel("skybox"));
-
+	loadAssets();
 	initEntities();
+
+	_cubeMap = new CubeMap(std::string("skybox/mn_front.png"), std::string("skybox/mn_back.png"),
+		std::string("skybox/mn_up.png"), std::string("skybox/mn_down.png"),
+		std::string("skybox/mn_right.png"), std::string("skybox/mn_left.png"),
+		_modelManager->getModel("skybox"));
 }
 
-void GameplayScene::loadAssets()
-{
-	/* Models */
-	_modelManager->loadModel("skybox", "skybox/skybox.obj");
-	_modelManager->loadModel("cube", "cube/cube.obj");
-	_modelManager->loadModel("terrain", "level/level.obj");
-	_modelManager->loadModel("tree", "level/tree/tree.obj");
-	_modelManager->loadModel("plane", "plane/plane.obj");
-
-	/* Textures */
-	_textureManager->loadTexture("landTexture", "landTexture.png");
-
-	/* Initialize Lights */
-	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0),1);
-	_lights.push_back(_directionalLight);
-	_flashLight = new SpotLight(glm::vec3(1, 1, 0), _activeCamera->getPosition(), _activeCamera->getForward(),
-		glm::cos(glm::radians(12.5f)),
-		glm::cos(glm::radians(17.5f)),
-		1.0f, 0.09f, 0.032f);
-	_lights.push_back(_flashLight);
-	_lights.push_back(new PointLight(glm::vec3((float)0 / 255, (float)255 / 255, (float)0 / 255),
-		glm::vec3(44, 17, -34), 1, 0.14f, 0.07f));
-	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)0 / 255, (float)0 / 255),
-		glm::vec3(93, 42, 7), 1, 0.022f, 0.0019f));
-	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)191 / 255, (float)0 / 255),
-		glm::vec3(62, 32, -118), 1, 0.007f, 0.0002f));
-}
 
 void GameplayScene::initEntities()
 {
-	Entity* temp;
-	
 	// Terrain
 	temp = new Entity(_modelManager->getModel("terrain"));
 	temp->addRotation(glm::vec3(0, 1, 0), 180);
@@ -354,16 +355,50 @@ void GameplayScene::initEntities()
 	temp = new Entity(_modelManager->getModel("plane"));
 	temp->setScale(0.25f);
 	temp->addRotation(glm::vec3(0, 0, 1), 90);
-	temp->setTranslation(glm::vec3(7, 4, -5));
+	temp->setTranslation(glm::vec3(7, 4, 0));
 	temp->rotate();
 	_mirrorCamera->setPosition(temp->getPosition());
-	_modelManager->getModel("plane")->getMeshes()[0]->setTexture(_rttTexture);
+	temp->getModel()->getMeshes()[0]->setTexture(_textureManager->getTexture("mirrorTexture"));
 	_mirror = temp;
 	_entities.push_back(_mirror);
+
+	// StreetLamp
+	temp = new Entity(_modelManager->getModel("lamp"));
+	temp->setTranslation(glm::vec3(-3.72f, 1.342f, -13.2791f));
+	temp->addRotation(glm::vec3(0, 1, 0), 30);
+	temp->rotate();
+	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), temp->getPosition(), 1, 0.09f, 0.032f));
+	_entities.push_back(temp);
+}
+
+void GameplayScene::loadAssets()
+{
+	/* Models */
+	_modelManager->loadModel("skybox", "skybox/skybox.obj");
+	_modelManager->loadModel("cube", "cube/cube.obj");
+	_modelManager->loadModel("terrain", "level/level.obj");
+	_modelManager->loadModel("tree", "level/tree/tree.obj");
+	_modelManager->loadModel("plane", "plane/plane.obj");
+	_modelManager->loadModel("lamp", "lamp/untitled.obj");
+
+	/* Textures */
+	bool success;
+	_textureManager->loadTexture("landTexture", "landTexture.png", success);
+	_textureManager->loadTexture("mirrorTexture", _rttTexture);
+
+	/* Initialize Lights */
+	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0), 1);
+	_lights.push_back(_directionalLight);
+	_flashLight = new SpotLight(glm::vec3(1, 1, 0), _activeCamera->getPosition(), _activeCamera->getForward(),
+		glm::cos(glm::radians(12.5f)),
+		glm::cos(glm::radians(17.5f)),
+		1.0f, 0.09f, 0.032f);
+	_lights.push_back(_flashLight);
 }
 
 void GameplayScene::unloadAssets()
 {
 	_modelManager->unloadModel("skybox");
 	_modelManager->unloadModel("plane");
+	_modelManager->unloadModel("cube");
 }

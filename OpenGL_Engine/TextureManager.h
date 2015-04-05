@@ -8,10 +8,15 @@
 class TextureManager
 {
 public:
-	void loadTexture(std::string name, std::string fileName)
+	void loadTexture(std::string name, std::string fileName, bool& success)
 	{
 		if (_textures.find(name) == _textures.end())
+		{
+			std::cout << "Loading Texture: " << fileName << std::endl;
 			_textures[name] = new Texture(fileName);
+			success = true;
+		}
+		success = false;
 	}
 	void loadTexture(std::string name, Texture* texture)
 	{

@@ -11,6 +11,7 @@ int main()
 	TextureManager* textureManager = new TextureManager();
 	ShaderUniforms* uniforms = new ShaderUniforms();
 	ModelManager* modelManager = new ModelManager();
+	modelManager->setTextureManager(textureManager);
 	GLint* width = new GLint(0);
 	GLint* height = new GLint(0);
 	SDL_GetWindowSize(display->getWindow(), width, height);
@@ -46,6 +47,7 @@ int main()
 		scene.render();
 
 		display->update();
+
 
 		currentFrameSpeed = SDL_GetTicks() - currentFrameTime;
 		if (fpsMill > currentFrameSpeed)

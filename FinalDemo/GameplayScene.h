@@ -37,6 +37,7 @@ private:
 	std::vector<Entity*> _entities;
 	Entity* _lamp;
 	Entity* _mirror;
+	Entity* temp;
 
 	/* Cameras */
 	Camera* _mirrorCamera;

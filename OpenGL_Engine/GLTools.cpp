@@ -698,7 +698,7 @@ void gltUploadModel(ShaderAttributes &pA, std::vector<tinyobj::shape_t> &shapes)
 	*/
 }
 
-void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene)
+void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene, TextureManager* textureManager)
 {
 	float vX, vY, vZ;
 	float nX, nY, nZ;
@@ -741,34 +741,46 @@ void gltUploadModel(std::vector<ShaderAttributes*> &pA, const aiScene* scene)
 					mesh->Material.shininessStrength = shininessStrength;
 					
 
-				std::cout << "Shiniess = " << shininess << " strength = " << shininessStrength << std::endl;
 				
 				aiString texturePath;
 				if(material->GetTextureCount(aiTextureType_DIFFUSE) > 0 &&
 					material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS)
 				{
-					std::cout << "\tDiffuse Texture Found!" << std::endl;
-					mesh->setTexture(new Texture(texturePath.data));
+					//std::cout << "\tDiffuse Texture Found!" << std::endl;
+					bool success;
+					textureManager->loadTexture(texturePath.data, texturePath.data, success);
+					if (success)
+					{
+						std::cout << "Texture " << texturePath.data << " loaded" << std::endl;
+					}
+					mesh->setTexture(textureManager->getTexture(texturePath.data));
 				}
 				if (material->GetTextureCount(aiTextureType_NORMALS) > 0 &&
 					material->GetTexture(aiTextureType_NORMALS, 0, &texturePath) == AI_SUCCESS)
 				{
-					std::cout << "\tNormal Texture Found!" << std::endl;
-					mesh->setNormalTexture(new Texture(texturePath.data));
+					bool success;
+					textureManager->loadTexture(texturePath.data, texturePath.data, success);
+					if (success)
+					{
+						std::cout << "Texture " << texturePath.data << " loaded" << std::endl;
+					}
+					mesh->setNormalTexture(textureManager->getTexture(texturePath.data));
 				}else{
-					std::cout << "\tLoading default normal texture..." << std::endl;
-					mesh->setNormalTexture(new Texture("default_normal.jpg"));
+					bool success;
+					textureManager->loadTexture("default_normal.jpg", "default_normal.jpg", success);
+					mesh->setNormalTexture(textureManager->getTexture("default_normal.jpg"));
 				}
 			}else{
-				std::cout << "\tLoading default normal texture..." << std::endl;
-				mesh->setNormalTexture(new Texture("default_normal.jpg"));
+				bool success;
+				textureManager->loadTexture("default_normal.jpg", "default_normal.jpg", success);
+				mesh->setNormalTexture(textureManager->getTexture("default_normal.jpg"));
 			}
 		}
 		else{
-			std::cout << "\tLoading default normal texture..." << std::endl;
-			mesh->setNormalTexture(new Texture("default_normal.jpg"));
+			bool success;
+			textureManager->loadTexture("default_normal.jpg", "default_normal.jpg", success);
+			mesh->setNormalTexture(textureManager->getTexture("default_normal.jpg"));
 		}
-
 
 		for (int i = 0; i < a->mNumVertices; i++)
 		{
