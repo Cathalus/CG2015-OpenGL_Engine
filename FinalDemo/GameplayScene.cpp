@@ -3,6 +3,8 @@
 
 void GameplayScene::update(float delta)
 {
+	_acc += delta;
+
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 	glm::vec3 deltaMovement;
 	glm::vec3 forward = _activeCamera->getForward();
@@ -27,27 +29,27 @@ void GameplayScene::update(float delta)
 
 	if (currentKeyStates[SDL_SCANCODE_W])
 	{
-		_cameras[0]->setPosition(_cameras[0]->getPosition() + _cameras[0]->getForward()*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + _cameras[0]->getForward()*delta*_movementSpeed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_S])
 	{
-		_cameras[0]->setPosition(_cameras[0]->getPosition() - _cameras[0]->getForward()*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() - _cameras[0]->getForward()*delta*_movementSpeed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_A])
 	{
-		_cameras[0]->setPosition(_cameras[0]->getPosition() - (glm::normalize(glm::cross(_cameras[0]->getForward(), _cameras[0]->getUp())))*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() - (glm::normalize(glm::cross(_cameras[0]->getForward(), _cameras[0]->getUp())))*delta*_movementSpeed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_D])
 	{
-		_cameras[0]->setPosition(_cameras[0]->getPosition() + (glm::normalize(glm::cross(_cameras[0]->getForward(), _cameras[0]->getUp())))*delta*_speed);
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + (glm::normalize(glm::cross(_cameras[0]->getForward(), _cameras[0]->getUp())))*delta*_movementSpeed);
 	}
 	if (currentKeyStates[SDL_SCANCODE_SPACE])
 	{
-		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, delta*_speed, 0));
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, delta*_movementSpeed, 0));
 	}
 	if (currentKeyStates[SDL_SCANCODE_LSHIFT])
 	{
-		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, -delta*_speed, 0));
+		_cameras[0]->setPosition(_cameras[0]->getPosition() + glm::vec3(0, -delta*_movementSpeed, 0));
 	}
 
 	if (currentKeyStates[SDL_SCANCODE_PAGEUP])
@@ -127,6 +129,10 @@ void GameplayScene::update(float delta)
 			std::cout << temp->getPosition().x << " " << temp->getPosition().y << " " <<  temp->getPosition().z << std::endl;
 		}
 	}
+	if (currentKeyStates[SDL_SCANCODE_X])
+	{
+		std::cout << _activeCamera->getPosition().x << " " << _activeCamera->getPosition().y << " " << _activeCamera->getPosition().z << std::endl;
+	}
 
 	if (currentKeyStates[SDL_SCANCODE_1])
 	{
@@ -179,6 +185,10 @@ void GameplayScene::update(float delta)
 	_flashLight->setDirection(_cameras[0]->getForward());
 
 	_lamp->setTranslation(_directionalLight->getPosition());
+
+	// Bouncing cube animation
+	float val = glm::sin(_acc) * 4;
+	_bounceCube->setTranslation(glm::vec3(_bounceCube->getPosition().x, 7+val, _bounceCube->getPosition().z));
 }
 
 void GameplayScene::updateLightSources()
@@ -369,6 +379,28 @@ void GameplayScene::initEntities()
 	temp->rotate();
 	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), temp->getPosition(), 1, 0.09f, 0.032f));
 	_entities.push_back(temp);
+
+	temp = new Entity(_modelManager->getModel("cam"));
+	_camera = temp;
+	_camera->setScale(0.1f);
+	_camera->setTranslation(glm::vec3(77.2401f*0.1f, 202.332f*0.1f, -62.97f*0.1f));
+	_camera->getModel()->getMeshes()[0]->setTexture(_textureManager->getTexture("landTexture"));
+	_camera->addRotation(glm::vec3(0, 1, 0), 90);
+	_camera->rotate();
+	_entities.push_back(_camera);
+
+
+	// In House Light
+	_lights.push_back(new PointLight(glm::vec3((float)255 / 255, (float)214 / 255, (float)170 / 255), glm::vec3(0.54903f,4.12578f, 2.50576f), 1, 0.09f, 0.032f));
+
+	// Play Zone Light
+	_lights.push_back(new PointLight(glm::vec3((float)200 / 255, (float)200 / 255, (float) 200 / 255), glm::vec3(-62, 15, -54), 1, 0.022f, 0.0019f));
+
+	// Cube
+	temp = new Entity(_modelManager->getModel("cube_bricks"));
+	_bounceCube = temp;
+	_bounceCube->setTranslation(glm::vec3(-54, 7, -49));
+	_entities.push_back(_bounceCube);
 }
 
 void GameplayScene::loadAssets()
@@ -376,10 +408,12 @@ void GameplayScene::loadAssets()
 	/* Models */
 	_modelManager->loadModel("skybox", "skybox/skybox.obj");
 	_modelManager->loadModel("cube", "cube/cube.obj");
+	_modelManager->loadModel("cube_bricks", "cube/cube_brick.obj");
 	_modelManager->loadModel("terrain", "level/level.obj");
 	_modelManager->loadModel("tree", "level/tree/tree.obj");
 	_modelManager->loadModel("plane", "plane/plane.obj");
 	_modelManager->loadModel("lamp", "lamp/untitled.obj");
+	_modelManager->loadModel("cam", "kamera/KameraNew.obj");
 
 	/* Textures */
 	bool success;
@@ -389,7 +423,7 @@ void GameplayScene::loadAssets()
 	/* Initialize Lights */
 	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0), 1);
 	_lights.push_back(_directionalLight);
-	_flashLight = new SpotLight(glm::vec3(1, 1, 0), _activeCamera->getPosition(), _activeCamera->getForward(),
+	_flashLight = new SpotLight(glm::vec3(1, 1, 1), _activeCamera->getPosition(), _activeCamera->getForward(),
 		glm::cos(glm::radians(12.5f)),
 		glm::cos(glm::radians(17.5f)),
 		1.0f, 0.09f, 0.032f);

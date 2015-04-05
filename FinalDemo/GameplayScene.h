@@ -23,7 +23,8 @@ private:
 	/* Controls */
 	GLfloat _lastX, _lastY;
 	GLfloat _yaw = -90.0f, _pitch = 0;
-	float _speed = 20.0f;
+	float _speed = 60.0f;
+	float _movementSpeed = 5.0f;
 	bool _flashLightActive = false;
 	bool _flashLightKeyLock = false;
 	
@@ -38,6 +39,8 @@ private:
 	Entity* _lamp;
 	Entity* _mirror;
 	Entity* temp;
+	Entity* _camera;
+	Entity* _bounceCube;
 
 	/* Cameras */
 	Camera* _mirrorCamera;
@@ -54,4 +57,6 @@ private:
 	SpotLight* _flashLight;
 	
 	CubeMap* _cubeMap;
+
+	float _acc = 0.0f;
 };
