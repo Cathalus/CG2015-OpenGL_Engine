@@ -1,4 +1,4 @@
-﻿Build started 05.04.2015 01:35:40.
+﻿Build started 05.04.2015 11:25:25.
      1>Project "C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\RenderToTexture\RenderToTexture.vcxproj" on node 2 (Build target(s)).
      1>Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\RenderToTexture.exe" /NOLOGO /LIBPATH:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\\lib" glew32s.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib "glEngine-Release.lib" assimpd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\RenderToTexture.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Cathalus\Documents\CG2015-OpenGL_Engine\Release\RenderToTexture.lib" /MACHINE:X86 /SAFESEH Release\init.obj
@@ -44,6 +44,7 @@
      1>glEngine-Release.lib(shaderuniforms.obj) : warning LNK4049: locally defined symbol ___glewUniform2fv imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewGenBuffers imported
+     1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribDivisor imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewBufferData imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>glEngine-Release.lib(shaderattributes.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
@@ -55,4 +56,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.50
+Time Elapsed 00:00:02.88

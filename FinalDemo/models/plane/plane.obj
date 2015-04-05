@@ -1,4 +1,4 @@
-# Blender v2.303 (sub 0) OBJ File: ''
+# Blender v2.13 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib plane.mtl
 o Plane
@@ -6,9 +6,9 @@ v -10.000000 0.000000 10.000000
 v 10.000000 0.000000 10.000000
 v -10.000000 0.000000 -10.000000
 v 10.000000 0.000000 -10.000000
-vt 30 0
-vt 30 30
-vt 0 30
+vt 1 0
+vt 1 1
+vt 0 1
 vt 0 0
 vn 0.000000 1.000000 0.000000
 usemtl None

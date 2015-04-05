@@ -249,11 +249,6 @@ void ShaderManager::drawWithShaderProgram(std::string programName, Model* model,
 			glDrawArrays(attrib->getDrawMethod(), 0, attrib->getVBOCount());
 		}
 		glBindVertexArray(0);
-		// Unbind Textures
-		/*glActiveTexture(GL_TEXTURE0 + 0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glActiveTexture(GL_TEXTURE0 + 10);
-		glBindTexture(GL_TEXTURE_2D, 0);*/
 	}
 }
 

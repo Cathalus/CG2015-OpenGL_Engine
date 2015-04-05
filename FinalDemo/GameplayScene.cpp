@@ -202,7 +202,6 @@ void GameplayScene::render()
 	glCullFace(GL_FRONT);			// remove peter panning
 	_activeCamera = _shadowCamera;
 	_shadowBuffer.bindForWriting();
-	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
 	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
 	_uniformManager->updateUniformData("MVP", _shadowCamera->getCameraProjection());
 	drawShadowMap("shadowMap");
@@ -210,13 +209,13 @@ void GameplayScene::render()
 	glCullFace(GL_BACK);
 
 	// Render to Texture (Mirror)
+	_activeCamera = _shadowCamera;
 	_rttBuffer.bindForWriting();
-	//_display->clear(0.5294117647058824f, 0.807843137254902f, 0.9803921568627451f, 1.0f);
 	_display->clear((float)0 / 255, (float)0 / 255, (float)50 / 255, 1);
-	_uniformManager->updateUniformData("MVP", _mirrorCamera->getCameraProjection());
+	_uniformManager->updateUniformData("MVP", _activeCamera->getCameraProjection());
 	draw(true);
 
-	temp = _activeCamera;
+	_activeCamera = temp;
 
 	// Depth-bias -1|1 to 0|1
 	glm::mat4 biasMatrix(
@@ -270,7 +269,7 @@ void GameplayScene::draw(bool drawLightSource)
 void GameplayScene::init()
 {
 	loadAssets();
-	initEntities();
+	
 	SDL_ShowCursor(0);
 	/* Mouse Delta */
 	_lastX = _display->getWidth() / 2;
@@ -301,6 +300,8 @@ void GameplayScene::init()
 						   std::string("skybox/mn_up.png"), std::string("skybox/mn_down.png"),
 						   std::string("skybox/mn_right.png"), std::string("skybox/mn_left.png"),
 						   _modelManager->getModel("skybox"));
+
+	initEntities();
 }
 
 void GameplayScene::loadAssets()
@@ -310,6 +311,10 @@ void GameplayScene::loadAssets()
 	_modelManager->loadModel("cube", "cube/cube.obj");
 	_modelManager->loadModel("terrain", "level/level.obj");
 	_modelManager->loadModel("tree", "level/tree/tree.obj");
+	_modelManager->loadModel("plane", "plane/plane.obj");
+
+	/* Textures */
+	_textureManager->loadTexture("landTexture", "landTexture.png");
 
 	/* Initialize Lights */
 	_directionalLight = new DirectionalLight(glm::vec3((float)58 / 255, (float)58 / 255, (float)135 / 255), glm::vec3(-215, 210, -245), glm::vec3(1, 0, 0),1);
@@ -344,6 +349,17 @@ void GameplayScene::initEntities()
 	temp = new Entity(_modelManager->getModel("tree"));
 	temp->setTranslation(glm::vec3(0, 0, -10));
 	_entities.push_back(temp);
+
+	// Mirror
+	temp = new Entity(_modelManager->getModel("plane"));
+	temp->setScale(0.25f);
+	temp->addRotation(glm::vec3(0, 0, 1), 90);
+	temp->setTranslation(glm::vec3(7, 4, -5));
+	temp->rotate();
+	_mirrorCamera->setPosition(temp->getPosition());
+	_modelManager->getModel("plane")->getMeshes()[0]->setTexture(_rttTexture);
+	_mirror = temp;
+	_entities.push_back(_mirror);
 }
 
 void GameplayScene::unloadAssets()

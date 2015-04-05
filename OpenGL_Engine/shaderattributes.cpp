@@ -1,10 +1,11 @@
 #include "shaderattributes.h"
 #include <iostream>
 
-ShaderAttributes::ShaderAttributes()
+ShaderAttributes::ShaderAttributes(bool instanced)
 {
     // generate vertex array
     glGenVertexArrays(1, &_vao);
+	_instanced = instanced;
 }
 
 void ShaderAttributes::uploadEBOForIndex(int index, std::vector<GLuint> indices)
@@ -62,11 +63,36 @@ void ShaderAttributes::uploadBufferForIndex(int index, std::vector<glm::vec3> ve
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0])*vertices.size(), &vertices[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(index);
 	glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)0);
-
+	
     // Unbind VAO
     glBindVertexArray(0);
 
     _attributeBuffers.push_back(tempVBOIndex);
+}
+
+void ShaderAttributes::uploadInstancedBufferForIndex(int index, std::vector<glm::vec3> vertices)
+{
+	_instanced = true;
+	_vboCount = vertices.size();
+	// bind vertex array
+	glBindVertexArray(_vao);
+
+	GLuint tempVBOIndex;
+	GLuint tempEBOIndex;
+	// generate buffers
+	glGenBuffers(1, &tempVBOIndex);
+
+	/* VBO Buffer */
+	glBindBuffer(GL_ARRAY_BUFFER, tempVBOIndex);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0])*vertices.size(), &vertices[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(index);
+	glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)0);
+	glVertexAttribDivisor(2, 1);
+
+	// Unbind VAO
+	glBindVertexArray(0);
+
+	_attributeBuffers.push_back(tempVBOIndex);
 }
 
 void ShaderAttributes::uploadBufferForIndex(int index, std::vector<glm::vec2> vertices)

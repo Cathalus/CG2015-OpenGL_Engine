@@ -13,11 +13,12 @@ class ShaderAttributes
 private:
     friend class ShaderManager;
 public:
-    ShaderAttributes();
+    ShaderAttributes(bool instanced = false);
 	~ShaderAttributes();
 	void uploadEBOForIndex(int index, std::vector<GLuint> indices);
 	void uploadBufferForIndex(int index, std::vector<glm::vec4> vertices);
 	void uploadBufferForIndex(int index, std::vector<glm::vec3> vertices);
+	void uploadInstancedBufferForIndex(int index, std::vector<glm::vec3> vertices);
 	void uploadBufferForIndex(int index, std::vector<glm::vec2> vertices);
 	void uploadBufferForIndex(int index, int dim, std::vector<float> vertices);
     void setDrawMethod(GLenum method) { _drawMethod = method; }
@@ -51,6 +52,7 @@ private:
 	Texture* _normalTexture;
 	bool _hasTexture = false;
 	bool _hasNormalTexture = false;
+	bool _instanced = false;
 };
 
 #endif // SHADERATTRIBUTES_H
