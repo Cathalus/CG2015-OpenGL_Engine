@@ -1,3 +1,0 @@
-TODO:
-
-- texturemanager für mit assimp geladene texturen
